@@ -5,3 +5,43 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+
+.swiper-pagination {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #CCCCCC; 
+  margin: 0 8px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #C92071;
+}
+
+@media (max-width: 770px) {
+  .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 770px) {
+  .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
+    padding-bottom: 80px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (min-width: 850px) and (max-width: 1024px) {
+  .hero-height {
+    height: 800px !important;
+  }
+}
+

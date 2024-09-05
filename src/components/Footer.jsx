@@ -1,7 +1,7 @@
 import logo from '../assets/logo.png'
 export function Footer() {
   return (
-    <footer className="bg-dark-gray font-Inter text-white">
+    <footer className="bg-dark-gray text-white">
       <div className="m-auto px-5 lg:px-[100px] pt-[50px] pb-[46px] lg:pb-[22px] grid grid-cols-2 lg:grid-cols-5">
         <div className="col-span-2 font-medium text-sm md:font-normal lg:text-base leading-[22px] lg:leading-[26px] tracking-[.25px] pb-10">
           <img
