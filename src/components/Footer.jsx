@@ -13,10 +13,10 @@ export function Footer() {
             A Drip Store é a sua loja de confiança para encontrar os melhores materiais esportivos. Oferecemos uma ampla variedade de tênis, roupas e acessórios das marcas mais renomadas, garantindo qualidade, estilo e desempenho para todos os amantes de esportes.
           </p>
           <div className="flex items-center gap-6 pt-5 lg:pt-10">
-            <a className="hover:opacity-50" href="#">
+            <a className="hover:opacity-50" href="https://m.facebook.com/digitalcollegebr/" target='_blank'>
               <i className="fa-brands fa-facebook-f fa-fw text-white text-lga-fw"></i>
             </a>
-            <a className="hover:opacity-50" href="#">
+            <a className="hover:opacity-50" href="https://www.instagram.com/digitalcollegebr?igsh=MThhbmFuNnpuaWl5Zg==" target='_blank'>
               <i className="fa-brands fa-instagram fa-fw text-white text-lg"></i>
             </a>
             <a className="hover:opacity-50" href="#">
