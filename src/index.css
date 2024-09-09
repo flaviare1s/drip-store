@@ -30,6 +30,13 @@
   height: 24px;
 }
 
+@media (min-width: 450px) {
+  .logo-svg {
+    width: 253px;
+    height: 44px;
+  }
+}
+
 @media (max-width: 770px) {
   .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
     padding-bottom: 60px;
@@ -41,11 +48,6 @@
   .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
     padding-bottom: 80px;
     margin-bottom: 40px;
-  }
-
-  .logo-svg {
-    width: 253px;
-    height: 44px;
   }
 }
 
