@@ -4,7 +4,7 @@ import patternDesktop from '../../assets/hero-pattern-desktop.png';
 
 export const HeroSlide = ({ eyebrown, titulo, descricao, ctaText, ctaLink, imagem }) => {
   return (
-    <div className="w-full h-full flex flex-col lg:flex-row-reverse justify-between items-center px-5 lg:pt-[78px] lg:pl-[100px] lg:pr-[37px]">
+    <div className="w-full h-full flex flex-col lg:flex-row-reverse justify-between items-center px-5 lg:pt-[78px] lg:pl-[100px] lg:pr-[37px] bg-light-gray-3">
       <div className="lg:w-[60%] flex justify-center bg">
         <img className="absolute right-0 pt-5 lg:hidden" src={patternMobile} alt="Hero Pattern Mobile" />
         <img className="hidden lg:absolute lg:right-[37px] lg:top-[78px] lg:block" src={patternDesktop} alt="Hero Pattern Mobile" />
