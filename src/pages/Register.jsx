@@ -13,8 +13,8 @@ export const Register = () => {
   } = useForm();
 
   return (
-    <section className="bg-secondary px-[30px] pt-16 pb-[82px] flex flex-col lg:items-center lg:flex-row lg:justify-evenly">
-      <section className="bg-white p-[30px] rounded sm:w-[583px]">
+    <section className="bg-secondary px-[30px] pt-16 pb-[82px] flex flex-col items-center lg:flex-row lg:justify-evenly">
+      <section className="bg-white p-[30px] rounded w-full sm:w-[583px]">
         <h1 className="font-bold text-[22px] sm:text-[32px] text-center leading-[34px] sm:leading-[36px] tracking-[2px] sm:tracking-[1px] sm:text-left pb-2.5 sm:pb-5">
           Crie sua conta
         </h1>
