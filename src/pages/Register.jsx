@@ -59,7 +59,7 @@ export const Register = () => {
               Nome *
             </label>
             <input
-              className="w-full p-4 bg-light-gray-3 rounded-lg mb-[30px]"
+              className="w-full p-4 bg-light-gray-3 rounded-lg"
               type="text"
               id="nome"
               placeholder="Insira seu nome"
@@ -68,11 +68,11 @@ export const Register = () => {
               })}
             />
             {errors.password && (
-              <small className="text-red-500">{errors.email.message}</small>
+              <small className="text-red-500">{errors.nome.message}</small>
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="email">E-mail *</label>
+            <label className="mt-3" htmlFor="email">E-mail *</label>
             <input
               className="w-full p-4 bg-light-gray-3 rounded-lg"
               type="email"
