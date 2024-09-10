@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { Loader } from './components/Loader.jsx'
 import { auth } from './firebase/config.js'
+import { ResetPassword } from './pages/ResetPassword.jsx'
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -34,6 +35,7 @@ export function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='reset-password' element={<ResetPassword />} />
         </Routes>
         <Footer />
        </BrowserRouter>

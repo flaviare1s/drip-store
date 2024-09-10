@@ -55,7 +55,7 @@ export const Register = () => {
         </p>
         <form onSubmit={handleSubmit(cadastrar)}>
           <div className="flex flex-col">
-            <label htmlFor="password" className="mt-3">
+            <label htmlFor="nome" className="mt-3 font-bold">
               Nome *
             </label>
             <input
@@ -72,7 +72,7 @@ export const Register = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label className="mt-3" htmlFor="email">E-mail *</label>
+            <label className="mt-3 font-bold" htmlFor="email">E-mail *</label>
             <input
               className="w-full p-4 bg-light-gray-3 rounded-lg"
               type="email"
@@ -91,7 +91,7 @@ export const Register = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="password" className="mt-3">
+            <label htmlFor="password" className="mt-3 font-bold">
               Senha *
             </label>
             <input
