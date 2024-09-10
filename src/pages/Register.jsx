@@ -95,10 +95,10 @@ export const Register = () => {
               Senha *
             </label>
             <input
-              className="w-full p-4 bg-light-gray-3 rounded-lg mb-[30px]"
+              className="w-full p-4 bg-light-gray-3 rounded-lg"
               type="password"
               id="password"
-              placeholder="Insira uma password"
+              placeholder="Insira uma senha"
               {...register("password", {
                 required: "Digite uma senha",
                 minLength: {
@@ -108,10 +108,12 @@ export const Register = () => {
               })}
             />
             {errors.password && (
-              <small className="text-red-500">{errors.email.message}</small>
+              <small className="text-red-500">{errors.password.message}</small>
             )}
           </div>
-          <Button type="submit" title="Criar conta" />
+          <div className=" mt-[30px]">
+            <Button type="submit" title="Criar conta" />
+          </div>
           <div className="flex flex-col items-center justify-center lg:flex-row pt-[30px] gap-5">
             <p className="text-center text-sm sm:text-base">Ou faça login com</p>
             <div className="flex justify-center gap-6">
