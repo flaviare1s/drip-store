@@ -12,7 +12,7 @@ export const NavBar = () => {
         <div className='lg:hidden flex flex-col flex-grow items-center justify-center w-full mt-[90px]'>
           <hr className="border-1 border-light-gray-2 w-full" />
           <Link to='/login' className='bg-primary h-10 w-[248px] text-white rounded-lg block font-bold text-sm text-center p-2.5 hover:bg-tertiary my-5'>Entrar</Link>
-          <Link className='underline whitespace-nowrap' to='/register'>Cadastre-se</Link>
+          <Link className='underline whitespace-nowrap hover:text-primary hover:font-bold' to='/register'>Cadastre-se</Link>
         </div>
       </nav>
     </section>

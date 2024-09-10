@@ -25,7 +25,7 @@ export const Header = () => {
           <SearchComponent />
         </div>
         <div className='hidden lg:flex gap-3 items-center justify-center'>
-          <Link className='underline whitespace-nowrap' to='/register'>Cadastre-se</Link>
+          <Link className='underline whitespace-nowrap hover:text-primary hover:font-bold' to='/register'>Cadastre-se</Link>
           <Link to='/login' className='bg-primary h-10 w-[114px] text-white rounded-lg block font-bold text-sm text-center p-2.5 hover:bg-tertiary'>Entrar</Link>
         </div>
         <div className='flex gap-3'>
