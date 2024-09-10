@@ -5,20 +5,40 @@ import { Footer } from './components/Footer.jsx'
 import { Login } from './pages/Login.jsx'
 import { Register } from './pages/Register.jsx'
 import { Toaster } from 'react-hot-toast'
+import { UserContext } from './contexts/UserContext.jsx'
+import { useEffect, useState } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import { Loader } from './components/Loader.jsx'
+import { auth } from './firebase/config.js'
 export function App() {
+  const [usuarioLogado, setUsuarioLogado] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUsuarioLogado(user)
+      setLoading(false)
+    })
+  }, [])
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <>
-     <BrowserRouter>
-     <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-      </Routes>
-      <Footer />
-     </BrowserRouter>
-     <Toaster position='top-center'/>
+     <UserContext.Provider value={usuarioLogado}>
+       <BrowserRouter>
+       <Header />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+        <Footer />
+       </BrowserRouter>
+       <Toaster position='top-center'/>
+     </UserContext.Provider>
     </>
   )
 }
