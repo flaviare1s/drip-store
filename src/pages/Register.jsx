@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { Button } from "../components/Button";
 import google from "../assets/google.png";
 import facebook from "../assets/facebook.png";
+import tenisLeft from "../assets/tenis-left.png";
+import tenisRight from "../assets/tenis-right.png";
 
 export const Register = () => {
   const {
@@ -11,12 +13,12 @@ export const Register = () => {
   } = useForm();
 
   return (
-    <section className="bg-secondary px-[30px] pt-16 pb-[82px]">
-      <section className="bg-white p-[30px] rounded lg:w-[583px]">
-        <h1 className="font-bold text-[22px] md:text-[32px] text-center leading-[34px] md:leading-[36px] tracking-[2px] md:tracking-[1px] lg:text-left">
+    <section className="bg-secondary px-[30px] pt-16 pb-[82px] flex flex-col lg:items-center lg:flex-row lg:justify-evenly">
+      <section className="bg-white p-[30px] rounded sm:w-[583px]">
+        <h1 className="font-bold text-[22px] sm:text-[32px] text-center leading-[34px] sm:leading-[36px] tracking-[2px] sm:tracking-[1px] sm:text-left pb-2.5 sm:pb-5">
           Crie sua conta
         </h1>
-        <p className="text-center lg:text-left text-sm md:text-base pb-[30px]">
+        <p className="text-center sm:text-left text-sm sm:text-base pb-[30px]">
           Já possui uma conta? Entre{" "}
           <a className="underline" href="/login">
             aqui
@@ -65,7 +67,7 @@ export const Register = () => {
           </div>
           <Button type="submit" title="Criar conta" />
           <div className="flex flex-col items-center justify-center lg:flex-row pt-[30px] gap-5">
-            <p className="text-center text-sm md:text-base">Ou faça login com</p>
+            <p className="text-center text-sm sm:text-base">Ou faça login com</p>
             <div className="flex justify-center gap-6">
               <button><img src={ google } alt="Ícone do G-Mail" /></button>
               <button><img src={ facebook } alt="Ícone do Facebook" /></button>
@@ -73,6 +75,10 @@ export const Register = () => {
           </div>
         </form>
       </section>
+      <div className="lg:flex w-[500px] h-[600px] justify-between hidden relative">
+        <img className="absolute top-0 left-0 w-[300px]" src={ tenisLeft } alt="Imagem de tênis" />
+        <img className="absolute bottom-0 right-0 w-[300px]" src={ tenisRight } alt="Imagem de tênis" />
+      </div>
     </section>
   );
 };
