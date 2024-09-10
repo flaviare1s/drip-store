@@ -54,7 +54,7 @@ export const Header = () => {
       <div className="hidden lg:flex">
         <NavBar />
       </div>
-      {isMenuOpen && <NavBar />}
+      {isMenuOpen && <NavBar setIsMenuOpen={setIsMenuOpen} />}
       {isMenuOpen && <div onClick={handleOverlayClick}><Overlay /></div>}
     </header>
   );

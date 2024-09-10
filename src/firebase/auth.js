@@ -7,14 +7,14 @@ import {
   signOut,
   sendEmailVerification,
   sendPasswordResetEmail,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { auth } from "./config";
 import toast from "react-hot-toast";
-import { FacebookAuthProvider } from "firebase/auth/web-extension";
 
 // Cadastrar usuário com e-mail e senha:
-export async function cadastrarUsuario(nome, email, senha) {
-  const { user } = await createUserWithEmailAndPassword(auth, email, senha);
+export async function cadastrarUsuario(nome, email, password) {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
   // Define o nome de exibição com o nome vindo do formulário de cadastro
   await updateProfile(user, { displayName: nome });
 }

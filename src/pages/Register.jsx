@@ -4,6 +4,9 @@ import google from "../assets/google.png";
 import facebook from "../assets/facebook.png";
 import tenisLeft from "../assets/tenis-left.png";
 import tenisRight from "../assets/tenis-right.png";
+import { useNavigate } from "react-router-dom";
+import { cadastrarUsuario, entrarFacebook, entrarGoogle, verificarEmail } from "../firebase/auth";
+import toast from "react-hot-toast";
 
 export const Register = () => {
   const {
@@ -11,6 +14,32 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
+
+  function cadastrar(data) {
+    cadastrarUsuario(data.nome, data.email, data.password).then(() => {
+      verificarEmail()
+      toast.success("Usuário cadastrado com sucesso!")
+      navigate("/")
+    }).catch((error) => {
+      toast.error(`Um erro aconteceu: ${error.code}`)
+    })
+  }
+
+  function handleEntrarGoogle() {
+    entrarGoogle().then(() => {
+      toast.success("Usuário logado com sucesso!")
+      navigate("/")
+    })
+  }
+
+  function handleEntrarFacebook() {
+    entrarFacebook().then(() => {
+      toast.success("Usuário logado com sucesso!")
+      navigate("/")
+    })
+  }
 
   return (
     <section className="bg-secondary px-[30px] pt-16 pb-[82px] flex flex-col items-center lg:flex-row lg:justify-evenly">
@@ -24,7 +53,24 @@ export const Register = () => {
             aqui
           </a>
         </p>
-        <form>
+        <form onSubmit={handleSubmit(cadastrar)}>
+          <div className="flex flex-col">
+            <label htmlFor="password" className="mt-3">
+              Nome *
+            </label>
+            <input
+              className="w-full p-4 bg-light-gray-3 rounded-lg mb-[30px]"
+              type="text"
+              id="nome"
+              placeholder="Insira seu nome"
+              {...register("nome", {
+                required: "Nome obrigatório",
+              })}
+            />
+            {errors.password && (
+              <small className="text-red-500">{errors.email.message}</small>
+            )}
+          </div>
           <div className="flex flex-col">
             <label htmlFor="email">E-mail *</label>
             <input
@@ -45,23 +91,23 @@ export const Register = () => {
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="senha" className="mt-3">
+            <label htmlFor="password" className="mt-3">
               Senha *
             </label>
             <input
               className="w-full p-4 bg-light-gray-3 rounded-lg mb-[30px]"
-              type="senha"
-              id="senha"
-              placeholder="Insira uma senha"
-              {...register("senha", {
-                required: "E-mail obrigatório",
+              type="password"
+              id="password"
+              placeholder="Insira uma password"
+              {...register("password", {
+                required: "Digite uma senha",
                 minLength: {
                   value: 8,
-                  message: "A senha deve ter pelo menos 6 digitos",
+                  message: "A password deve ter pelo menos 6 digitos",
                 },
               })}
             />
-            {errors.senha && (
+            {errors.password && (
               <small className="text-red-500">{errors.email.message}</small>
             )}
           </div>
@@ -69,8 +115,8 @@ export const Register = () => {
           <div className="flex flex-col items-center justify-center lg:flex-row pt-[30px] gap-5">
             <p className="text-center text-sm sm:text-base">Ou faça login com</p>
             <div className="flex justify-center gap-6">
-              <button><img src={ google } alt="Ícone do G-Mail" /></button>
-              <button><img src={ facebook } alt="Ícone do Facebook" /></button>
+              <button onClick={handleEntrarGoogle}><img src={ google } alt="Ícone do G-Mail" /></button>
+              <button onClick={handleEntrarFacebook}><img src={ facebook } alt="Ícone do Facebook" /></button>
             </div>
           </div>
         </form>
