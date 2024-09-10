@@ -40,14 +40,12 @@
 @media (max-width: 770px) {
   .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
     padding-bottom: 60px;
-    margin-bottom: 40px;
   }
 }
 
 @media (min-width: 770px) {
   .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden.mySwiper {
     padding-bottom: 80px;
-    margin-bottom: 40px;
   }
 }
 
