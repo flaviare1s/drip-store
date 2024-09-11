@@ -17,7 +17,7 @@ export const Hero = () => {
         spaceBetween={50}
         slidesPerView={1}
       >
-        <SwiperSlide className="h-[550px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
+        <SwiperSlide className="h-[600px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
           <HeroSlide
             eyebrown={'Melhores ofertas personalizadas'}
             titulo={'Queima de estoque Nike 🔥'}
