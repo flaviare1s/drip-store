@@ -22,10 +22,10 @@ export const NavBar = ({ setIsMenuOpen }) => {
   return (
     <section className="flex justify-between w-[80vw] lg:w-full relative">
       <nav className='w-full flex flex-col lg:flex-row lg:justify-start items-start lg:items-center gap-4 lg:gap-8 text-dark-gray-2 leading-[28px] tracking-[0.75px] absolute lg:relative top-0 left-[-20px] z-50 bg-white p-[30px] lg:p-0 h-[100vh] lg:h-auto'>
-        <Link className='hover:underline hover:text-primary hover:font-bold' to='/'>Home</Link>
-        <Link className='hover:underline hover:text-primary hover:font-bold' to='/products'>Produtos</Link>
-        <Link className='hover:underline hover:text-primary hover:font-bold' to='/#categories'>Categorias</Link>
-        <Link className='hover:underline hover:text-primary hover:font-bold' to='/orders'>Meus pedidos</Link>
+        <Link onClick={handleCloseMenu} className='hover:underline hover:text-primary hover:font-bold' to='/'>Home</Link>
+        <Link onClick={handleCloseMenu} className='hover:underline hover:text-primary hover:font-bold' to='/products'>Produtos</Link>
+        <Link onClick={handleCloseMenu} className='hover:underline hover:text-primary hover:font-bold' to='/#categories'>Categorias</Link>
+        <Link onClick={handleCloseMenu} className='hover:underline hover:text-primary hover:font-bold' to='/orders'>Meus pedidos</Link>
 
         {!user && (
         <div className='lg:hidden flex flex-col flex-grow items-center justify-center w-full mt-[90px]'>
