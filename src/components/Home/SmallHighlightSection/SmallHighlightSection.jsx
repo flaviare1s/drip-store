@@ -14,6 +14,11 @@ export const SmallHighlightSection = ({ title }) => {
       <div className="pb-[50px] md:pb-[9px]">
         <div  className="flex justify-start md:justify-center items-center gap-5 md:gap-10 p-5 overflow-x-auto">
           <SmallHighlightItem
+            image={<TenisIcon />}
+            name={'Tênis'}
+            ctaLink={'#'}
+          />
+          <SmallHighlightItem
             image={<TShirtIcon />}
             name={'Camisetas'}
             ctaLink={'#'}
@@ -24,18 +29,8 @@ export const SmallHighlightSection = ({ title }) => {
             ctaLink={'#'}
           />
           <SmallHighlightItem
-            image={<PantsIcon />}
-            name={'Bonés'}
-            ctaLink={'#'}
-          />
-          <SmallHighlightItem
             image={<HeadphoneIcon />}
             name={'Headphones'}
-            ctaLink={'#'}
-          />
-          <SmallHighlightItem
-            image={<TenisIcon />}
-            name={'Tênis'}
             ctaLink={'#'}
           />
         </div>
