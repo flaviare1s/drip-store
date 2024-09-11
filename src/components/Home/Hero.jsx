@@ -4,8 +4,9 @@ import "swiper/css/pagination";
 import "swiper/css";
 import { HeroSlide } from "./HeroSlide";
 import whiteSneakers from "../../assets/white-sneakers2.png";
-import kSwiss from "../../assets/k-swiss.png";
+import kSwiss from "../../assets/colorido.png";
 import AirJordan from "../../assets/air-jordan.png";
+import NikeAzul from "../../assets/nike-azul.png";
 
 export const Hero = () => {
   return (
@@ -72,7 +73,7 @@ export const Hero = () => {
               }
               ctaText={"Ver Ofertas"}
               ctaLink={"#"}
-              imagem={whiteSneakers}
+              imagem={NikeAzul}
             />
           </div>
         </SwiperSlide>
