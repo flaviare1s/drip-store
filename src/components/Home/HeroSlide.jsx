@@ -22,7 +22,7 @@ export const HeroSlide = ({ eyebrown, titulo, descricao, ctaText, ctaLink, image
             {descricao}
           </p>
         </div>
-        <a href={ctaLink} className="bg-primary hover:bg-tertiary text-light-gray-3 text-base text-center p-3 font-bold leading-6 w-full h-12 lg:w-[220px] rounded-lg tracking-[.75px] mt-10 mb-2">
+        <a href={ctaLink} className="bg-primary hover:bg-tertiary text-light-gray-3 text-base text-center p-3 font-bold leading-6 w-full h-12 lg:w-[220px] rounded-lg tracking-[.75px] mt-10 mb-2.5">
           {ctaText}
         </a>
       </div>
