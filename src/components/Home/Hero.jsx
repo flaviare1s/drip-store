@@ -17,7 +17,7 @@ export const Hero = () => {
         spaceBetween={50}
         slidesPerView={1}
       >
-        <SwiperSlide className="h-[600px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
+        <SwiperSlide className="h-[650px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
           <HeroSlide
             eyebrown={'Melhores ofertas personalizadas'}
             titulo={'Queima de estoque Nike 🔥'}
@@ -27,7 +27,7 @@ export const Hero = () => {
             imagem={whiteSneakers}
           />
         </SwiperSlide>
-        <SwiperSlide className="h-[600px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
+        <SwiperSlide className="h-[650px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
           <HeroSlide
             eyebrown={'Melhores ofertas personalizadas'}
             titulo={'Super oferta K-Swiss 🔥'}
@@ -37,7 +37,7 @@ export const Hero = () => {
             imagem={kSwiss}
           />
         </SwiperSlide>
-        <SwiperSlide className="h-[600px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
+        <SwiperSlide className="h-[650px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
           <HeroSlide
             eyebrown={'Melhores ofertas personalizadas'}
             titulo={'Air Jordan Edição de Colecionador 🔥'}
@@ -47,7 +47,7 @@ export const Hero = () => {
             imagem={AirJordan}
           />
         </SwiperSlide>
-        <SwiperSlide className="h-[600px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
+        <SwiperSlide className="h-[650px] md:h-[650px] lg:h-[700px] xl:h-[500px] flex items-center justify-center hero-height">
           <HeroSlide
             eyebrown={'Melhores ofertas personalizadas'}
             titulo={'Promoção Imperdível!!!'}
