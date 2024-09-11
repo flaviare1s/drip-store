@@ -14,7 +14,7 @@ export const FeaturedProductList = () => {
   }, []);
 
   return (
-    <div className="text-Inter px-5 md:px-[100px] bg-light-gray-3 md:bg-purple-50 md:pb-[80px] pb-10">
+    <div className="text-Inter px-5 md:px-[100px] bg-gray-50 md:bg-purple-50 md:pb-[80px] pb-10">
       <div className="flex justify-between mb-5 items-center">
         <h1 className="font-bold md:text-2xl">Produtos em alta</h1>
         <a
