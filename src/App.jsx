@@ -11,6 +11,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { Loader } from './components/Loader.jsx'
 import { auth } from './firebase/config.js'
 import { ResetPassword } from './pages/ResetPassword.jsx'
+import { Products } from './pages/Products.jsx'
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -36,6 +37,7 @@ export function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='reset-password' element={<ResetPassword />} />
+          <Route path='products' element={<Products />} />
         </Routes>
         <Footer />
        </BrowserRouter>

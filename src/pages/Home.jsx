@@ -3,8 +3,21 @@ import { SideBySide } from '../components/Home/SideBySide.jsx'
 import { SmallHighlightSection } from '../components/Home/SmallHighlightSection/SmallHighlightSection.jsx'
 import airJordan from '../assets/air-jordan.png'
 import { FeaturedProductList } from '../components/Home/FeatureProductList/FeatureProductList.jsx'
+import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export const Home = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <main>
       <Hero />

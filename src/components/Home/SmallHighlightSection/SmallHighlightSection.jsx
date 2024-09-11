@@ -7,7 +7,7 @@ import { TenisIcon } from "../SmallHighlightSection/SmallHighlightIcons/TenisIco
 
 export const SmallHighlightSection = ({ title }) => {
   return (
-    <div className="py-10 bg-gray-50 md:bg-purple-50">
+    <div id="categories" className="py-10 bg-gray-50 md:bg-purple-50">
       <div>
         <h1 className="text-dark-gray-2 font-bold md:text-2xl md:text-center px-5">{title}</h1>
       </div>
