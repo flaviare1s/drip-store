@@ -2,12 +2,14 @@ import { Hero } from '../components/Home/Hero.jsx'
 import { SideBySide } from '../components/Home/SideBySide.jsx'
 import { SmallHighlightSection } from '../components/Home/SmallHighlightSection/SmallHighlightSection.jsx'
 import airJordan from '../assets/air-jordan.png'
+import { FeaturedProductList } from '../components/Home/FeatureProductList/FeatureProductList.jsx'
 
 export const Home = () => {
   return (
     <main>
       <Hero />
       <SmallHighlightSection />
+      <FeaturedProductList />
       <SideBySide
         image={airJordan}
         eyebrown={"Oferta Especial"}
