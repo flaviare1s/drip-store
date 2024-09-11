@@ -24,7 +24,7 @@ export const FeaturedProductList = () => {
           Ver todos →
         </a>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 rounded lg:grid-cols-4 bg-light-gray-3 md:bg-purple-50 gap-3 lg:gap-6 lg:gap-y-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 rounded lg:grid-cols-4 bg-gray-50 md:bg-purple-50 gap-3 lg:gap-6 lg:gap-y-10">
         {produtos &&
           produtos.map((produto) => (
             <ProductCard key={produto.id} produto={produto} />
