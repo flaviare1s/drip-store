@@ -1,17 +1,22 @@
 import { getProdutos } from "../firebase/produto.js";
 import { ProductCard } from "../components/Home/FeatureProductList/ProductCard.jsx";
 import { useState, useEffect } from "react";
+import { Loader } from "../components/Loader.jsx";
 
 export const Products = () => {
   const [produtos, setProdutos] = useState(null);
-
-  function carregarProdutos() {
-    getProdutos().then(setProdutos);
-  }
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    carregarProdutos();
+    getProdutos().then((data) => {
+      setProdutos(data);
+      setLoading(false);
+    });
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="text-Inter px-5 md:px-[100px] bg-gray-50 md:bg-purple-50 md:pb-[80px] py-10">
