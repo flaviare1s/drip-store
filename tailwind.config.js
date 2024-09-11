@@ -2,14 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: [
-    ".swiper",
-    ".swiper-initialized",
-    ".swiper-horizontal",
-    ".swiper-backface-hidden",
-    ".mySwiper",
-    ".swiper-pagination",
-    ".swiper-pagination-bullet",
-    ".swiper-pagination-bullet-active",
+    {
+      pattern: /swiper-.*/,
+    },
+    "swiper",
+    "mySwiper",
   ],
   theme: {
     extend: {
