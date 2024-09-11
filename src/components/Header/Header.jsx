@@ -33,7 +33,7 @@ export const Header = () => {
     <header className="p-5 sm:pt-10 lg:pt-12 sm:pb-[25px] lg:pb-[30px] lg:px-[105px]">
       <section className="flex justify-between items-center pb-5 sm:pb-[42px] gap-10">
         <BurguerIcon onClick={toggleMenu} />
-        <DigitalLogo />
+        <DigitalLogo setIsMenuOpen={setIsMenuOpen} />
         <div className="hidden lg:block w-full">
           <SearchComponent />
         </div>
