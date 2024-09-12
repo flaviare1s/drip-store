@@ -3,7 +3,7 @@
 export const ProductCard = ({ produto }) => {
   return (
     <section>
-      <div className="font-Inter">
+      <div className="font-Inter flex flex-col justify-center items-center">
         <div className="flex flex-col bg-white rounded lg:pb-10  pb-8 mb-[10px] lg:mb[18px] w-[147px] h-[160px] lg:w-[292px] lg:h-[321px]">
           {produto.desconto && produto.desconto > 0 && (
             <div className="flex">
@@ -13,7 +13,7 @@ export const ProductCard = ({ produto }) => {
             </div>
           )}
           <img
-            className="bg-white top-0 left-0 w-full h-full object-contain"
+            className="bg-white flex flex-col justify-center items-center w-full h-full object-contain"
             src={produto.imagem}
             alt={produto.nome}
           />
