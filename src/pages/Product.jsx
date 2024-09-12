@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getProduto } from "../firebase/produto.js";
 import { Loader } from "../components/Loader";
 import filledStar from "../assets/filled-star.svg";
@@ -9,6 +9,7 @@ import star from "../assets/star.svg";
 export const Product = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     getProduto(id)
@@ -68,7 +69,7 @@ export const Product = () => {
           <Link to="/checkout" className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]">Comprar</Link>
         </div>
       </div>
-      <Link to="/products" className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar para produtos</Link>
+      <button onClick={() => navigate(-1)} className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar</button>
     </section>
   );
 }; 
