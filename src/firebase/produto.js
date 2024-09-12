@@ -19,5 +19,5 @@ export async function getProduto(id) {
 
   const produto = await getDoc(produtoDoc)
 
-  return produto.data()
+  return { ...produto.data(), id: produto.id };
 }
