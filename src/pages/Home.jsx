@@ -5,6 +5,7 @@ import airJordan from '../assets/air-jordan.png'
 import { FeaturedProductList } from '../components/Home/FeatureProductList/FeatureProductList.jsx'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { HighHighlightSection } from '../components/Home/HighHighlightSection/HighHighlightSection.jsx'
 
 export const Home = () => {
   const location = useLocation();
@@ -21,6 +22,7 @@ export const Home = () => {
   return (
     <main>
       <Hero />
+      <HighHighlightSection />
       <SmallHighlightSection />
       <FeaturedProductList />
       <SideBySide
