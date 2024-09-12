@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import patternMobile from '../../assets/hero-pattern-mobile.png';
 import patternDesktop from '../../assets/hero-pattern-desktop.png';
+import { Link } from 'react-router-dom';
 
 export const HeroSlide = ({ eyebrown, titulo, descricao, ctaText, ctaLink, imagem }) => {
   return (
@@ -15,16 +16,16 @@ export const HeroSlide = ({ eyebrown, titulo, descricao, ctaText, ctaLink, image
           <p className="font-bold text-sm p-5 lg:text-base text-primary lg:text-warning text-center lg:text-left leading-[22px] tracking-[.75px]">
             {eyebrown}
           </p>
-          <h1 className="text-[40px] lg:text-[64px] lg:leading-[66px] font-extrabold text-center lg:text-left text-[#1F1F1F] leading-[50px] pt-2.5 pb-5 tracking-[1px]">
+          <h1 className="text-[40px] lg:text-[64px] lg:leading-[66px] font-extrabold text-center lg:text-left text-dark-gray leading-[50px] pt-2.5 pb-5 tracking-[1px]">
             {titulo}
           </h1>
-          <p className="text-[#474747] text-sm lg:text-lg font-medium leading-[22px] text-center lg:text-left tracking-[.25px] lg:tracking-[.75px]">
+          <p className="text-dark-gray-2 text-sm lg:text-lg font-medium leading-[22px] text-center lg:text-left tracking-[.25px] lg:tracking-[.75px]">
             {descricao}
           </p>
         </div>
-        <a href={ctaLink} className="bg-primary hover:bg-tertiary text-light-gray-3 text-base text-center p-3 font-bold leading-6 w-full h-12 lg:w-[220px] rounded-lg tracking-[.75px] mt-10 mb-[18px]">
+        <Link to={ctaLink} className="bg-primary hover:bg-tertiary text-light-gray-3 text-base text-center p-3 font-bold leading-6 w-full h-12 lg:w-[220px] rounded-lg tracking-[.75px] mt-10 mb-[18px]">
           {ctaText}
-        </a>
+        </Link>
       </div>
     </div>
   );
