@@ -24,10 +24,10 @@ export const Hero = () => {
               eyebrown={"Melhores ofertas personalizadas"}
               titulo={"Queima de estoque Nike 🔥"}
               descricao={
-                "O Nike Revolution 5 é perfeito para corridas diárias, com um design leve e respirável. Ideal para garantir conforto e performance durante os treinos."
+                "O Nike Revolution 6 Next Nature é perfeito para corridas diárias, com um design leve e respirável. Ideal para garantir conforto e performance durante os treinos."
               }
               ctaText={"Ver Ofertas"}
-              ctaLink={"#"}
+              ctaLink={"/products/ToTH5lhPiHyULiXx9PNn"}
               imagem={whiteSneakers}
             />
           </div>
@@ -37,12 +37,12 @@ export const Hero = () => {
           <div className="flex flex-col items-center justify-center h-full gap-y-4">
             <HeroSlide
               eyebrown={"Melhores ofertas personalizadas"}
-              titulo={"Super oferta K-Swiss 🔥"}
+              titulo={"Super oferta Adventure TrailX"}
               descricao={
-                "O K-Swiss Classic é um ícone do estilo casual, com seu design clássico e materiais de alta qualidade. Perfeito para quem busca estilo e conforto."
+                "O Mizuno Adventure TrailX é um ícone do estilo casual, com seu design clássico e materiais de alta qualidade. Perfeito para quem busca estilo e conforto."
               }
               ctaText={"Ver Ofertas"}
-              ctaLink={"#"}
+              ctaLink={"/products/aQWGkaVRBFZxDJ70WPvK"}
               imagem={kSwiss}
             />
           </div>
@@ -57,7 +57,7 @@ export const Hero = () => {
                 "O Air Jordan, um símbolo de excelência, traz design icônico e tecnologia avançada para colecionadores e amantes do basquete."
               }
               ctaText={"Ver Ofertas"}
-              ctaLink={"#"}
+              ctaLink={"/products/zTr3P4JJJGF2bFW6Hend"}
               imagem={AirJordan}
             />
           </div>
@@ -69,10 +69,10 @@ export const Hero = () => {
               eyebrown={"Melhores ofertas personalizadas"}
               titulo={"Promoção Imperdível!!!"}
               descricao={
-                "O Nike Air Max é conhecido por seu amortecimento responsivo, garantindo conforto e estilo para o seu dia a dia, com um toque esportivo."
+                "O Tênis Nike Retrô ClassicSport é conhecido por seu amortecimento responsivo, garantindo conforto e estilo para o seu dia a dia, com um toque esportivo."
               }
               ctaText={"Ver Ofertas"}
-              ctaLink={"#"}
+              ctaLink={"/products/NbT86l85UssfNkXnDFxP"}
               imagem={NikeAzul}
             />
           </div>

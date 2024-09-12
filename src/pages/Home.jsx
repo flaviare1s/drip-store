@@ -32,7 +32,7 @@ export const Home = () => {
         description={
           "Aproveite a nossa oferta especial para o Air Jordan Edição de Colecionador. Este modelo icônico combina design exclusivo com a melhor tecnologia de conforto e performance, ideal para quem busca se destacar com estilo e sofisticação."
         }
-        ctaLink={"#"}
+        ctaLink={"/products/zTr3P4JJJGF2bFW6Hend"}
         ctaText={"Ver Oferta"}
       />
     </main>
