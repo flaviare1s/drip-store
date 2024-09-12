@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getProduto } from "../firebase/produto.js";
 import { Loader } from "../components/Loader";
 import filledStar from "../assets/filled-star.svg";
@@ -67,6 +67,7 @@ export const Product = () => {
           </div>
         </div>
       </div>
+      <Link to="/products" className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar para produtos</Link>
     </section>
   );
-};
+}; 
