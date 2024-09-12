@@ -26,7 +26,7 @@ export const Hero = () => {
               descricao={
                 "O Nike Revolution 6 Next Nature é perfeito para corridas diárias, com um design leve e respirável. Ideal para garantir conforto e performance durante os treinos."
               }
-              ctaText={"Ver Ofertas"}
+              ctaText={"Ver Oferta"}
               ctaLink={"/products/ToTH5lhPiHyULiXx9PNn"}
               imagem={whiteSneakers}
             />
@@ -41,7 +41,7 @@ export const Hero = () => {
               descricao={
                 "O Mizuno Adventure TrailX é um ícone do estilo casual, com seu design clássico e materiais de alta qualidade. Perfeito para quem busca estilo e conforto."
               }
-              ctaText={"Ver Ofertas"}
+              ctaText={"Ver Oferta"}
               ctaLink={"/products/aQWGkaVRBFZxDJ70WPvK"}
               imagem={kSwiss}
             />
@@ -56,7 +56,7 @@ export const Hero = () => {
               descricao={
                 "O Air Jordan, um símbolo de excelência, traz design icônico e tecnologia avançada para colecionadores e amantes do basquete."
               }
-              ctaText={"Ver Ofertas"}
+              ctaText={"Ver Oferta"}
               ctaLink={"/products/zTr3P4JJJGF2bFW6Hend"}
               imagem={AirJordan}
             />
@@ -71,7 +71,7 @@ export const Hero = () => {
               descricao={
                 "O Tênis Nike Retrô ClassicSport é conhecido por seu amortecimento responsivo, garantindo conforto e estilo para o seu dia a dia, com um toque esportivo."
               }
-              ctaText={"Ver Ofertas"}
+              ctaText={"Ver Oferta"}
               ctaLink={"/products/NbT86l85UssfNkXnDFxP"}
               imagem={NikeAzul}
             />
