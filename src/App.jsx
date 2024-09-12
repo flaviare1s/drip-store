@@ -13,6 +13,7 @@ import { auth } from './firebase/config.js'
 import { ResetPassword } from './pages/ResetPassword.jsx'
 import { Products } from './pages/Products.jsx'
 import { Orders } from './pages/Orders.jsx'
+import { Product } from './pages/Product.jsx'
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -39,6 +40,7 @@ export function App() {
           <Route path='/register' element={<Register />} />
           <Route path='reset-password' element={<ResetPassword />} />
           <Route path='products' element={<Products />} />
+          <Route path='products/:id' element={<Product />} />
           <Route path='/orders' element={<Orders />} />
         </Routes>
         <Footer />

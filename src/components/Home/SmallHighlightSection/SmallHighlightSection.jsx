@@ -1,11 +1,10 @@
-/* eslint-disable react/prop-types */
 import { SmallHighlightItem } from "../SmallHighlightSection/SmallHighlightItem"
 import { TShirtIcon } from "../SmallHighlightSection/SmallHighlightIcons/TShirtIcon"
 import { PantsIcon } from "../SmallHighlightSection/SmallHighlightIcons/PantsIcon"
 import { HeadphoneIcon } from "../SmallHighlightSection/SmallHighlightIcons/HeadphoneIcon"
 import { TenisIcon } from "../SmallHighlightSection/SmallHighlightIcons/TenisIcon"
 
-export const SmallHighlightSection = ({ title }) => {
+export const SmallHighlightSection = () => {
   return (
     <div id="categories" className="py-10 bg-gray-50 md:bg-purple-50">
       <div>
