@@ -65,6 +65,7 @@ export const Product = () => {
             <p className="text-sm text-light-gray font-bold leading-[22px] tracking-[.75px]">Descrição do poduto:</p>
             <p className="text-dark-gray-2 text-sm">{produto.descricao}</p>
           </div>
+          <Link to="/checkout" className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]">Comprar</Link>
         </div>
       </div>
       <Link to="/products" className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar para produtos</Link>

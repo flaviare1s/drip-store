@@ -14,6 +14,7 @@ import { ResetPassword } from './pages/ResetPassword.jsx'
 import { Products } from './pages/Products.jsx'
 import { Orders } from './pages/Orders.jsx'
 import { Product } from './pages/Product.jsx'
+import { CartCheckout } from './pages/CartCheckout.jsx'
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -42,6 +43,7 @@ export function App() {
           <Route path='products' element={<Products />} />
           <Route path='products/:id' element={<Product />} />
           <Route path='/orders' element={<Orders />} />
+          <Route path='/checkout' element={<CartCheckout />} />
         </Routes>
         <Footer />
        </BrowserRouter>

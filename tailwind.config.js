@@ -24,6 +24,7 @@ export default {
         error: "#EE4266",
         success: "#52CA76",
         warning: "#F6AA1C",
+        warning_hover: "#CF8900",
         "dark-gray": "#1F1F1F",
         "dark-gray-2": "#474747",
         "dark-gray-3": "#666666",
