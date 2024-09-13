@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 export const HighHighlightItem = ({ title, imagem }) => {
   return (
-    <article className="relative bg-purple rounded-lg p-5 flex justify-between flex-grow min-h-[212px] lg:min-h-[250px]">
+    <article className="relative bg-purple-50 rounded-lg p-5 flex justify-between flex-grow min-h-[212px] lg:min-h-[250px]">
       <div className="w-1/2">
         <p className="bg-bright_yellow rounded-[30px] text-center text-xs font-bold py-2 w-[90px]">
           30% OFF

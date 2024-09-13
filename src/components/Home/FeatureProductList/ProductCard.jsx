@@ -10,17 +10,22 @@ export const ProductCard = ({ produto }) => {
 
   return (
     <Link to={`/products/${produto.id}`}>
-      <div className="font-Inter flex flex-col justify-center items-center p-2.5">
-        <div className="flex flex-col bg-white rounded lg:pb-10 pb-8 mb-[10px] lg:mb[18px] h-[160px] lg:h-[321px] w-full">
-          {produto.desconto && produto.desconto > 0 && (
+      <section className="font-Inter flex flex-col justify-center items-center p-2.5">
+        <div className="flex flex-col bg-white rounded mb-[10px] lg:mb[18px] min-h-[210px] lg:h-[321px] h-full w-full flex-grow">
+          {produto.desconto && produto.desconto > 0 ? (
             <div className="flex">
               <p className="bg-bright_yellow mt-5 ml-5 px-3 rounded-[30px] text-center text-xs font-bold py-2">
                 {produto.desconto * 100}% OFF
               </p>
             </div>
-          )}
+          ) : 
+            <div className="flex">
+              <p className="bg-white text-white mt-5 ml-5 px-3 rounded-[30px] text-center text-xs font-bold py-2">
+                Sem desconto
+              </p>
+            </div>}
           <img
-            className="bg-white flex flex-col justify-center items-center w-full h-full object-contain p-2.5"
+            className="bg-white flex flex-col justify-center items-center w-full h-full object-contain p-2.5 max-h-[150px] lg:max-h-[250px]"
             src={produto.imagem}
             alt={produto.nome}
           />
@@ -50,7 +55,7 @@ export const ProductCard = ({ produto }) => {
             </p>
           )}
         </div>
-      </div>
+      </section>
     </Link>
   );
 };
