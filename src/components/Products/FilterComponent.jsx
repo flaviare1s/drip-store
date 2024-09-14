@@ -1,23 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckSVG } from "./CheckSVG.jsx";
 import { RadioSVG } from "./RadioSVG.jsx";
 
-const tipos = ["Camisa", "Calça", "Tênis", "Fone"];
-const marcas = ["Adidas", "KSwiss", "Mizuno", "Fila", "AllStar"];
-const categorias = ["Esporte e Lazer", "Casual", "Utilitário", "Corrida"];
+const tipos = ["Tênis", "Camisa", "Calça", "Fone"];
+const marcasDefault = {
+  Camisa: ["Adidas", "Nike"],
+  Calça: ["Pool", "Taco"],
+  Tênis: ["Adidas", "KSwiss", "Nike", "Mizuno", "Fila"],
+  Fone: ["Sony", "JBL"],
+};
+const categoriasDefault = {
+  Camisa: ["Esporte e Lazer", "Casual"],
+  Calça: ["Esporte e Lazer", "Casual"],
+  Tênis: ["Esporte e Lazer", "Casual", "Utilitário", "Corrida"],
+  Fone: ["Headset", "Headphone", "Earphone"],
+} ;
 const genero = ["Masculino", "Feminino", "Unissex"];
 const estado = ["Novo", "Usado"];
 
 export const FilterComponent = () => {
-  const [selectedTipo, setSelectedTipo] = useState("");
+  const [selectedTipo, setSelectedTipo] = useState("Tênis");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});
   const [selectedEstado, setSelectedEstado] = useState({});
 
+  useEffect(() => {
+    handleTipoChange("Tênis");
+  }, []);
+
   const handleCheckboxChange = (item, type) => {
     const updater = {
-      marcas: setSelectedBrands,
+      brands: setSelectedBrands,
       categorias: setSelectedCategorias,
       genero: setSelectedGenero,
       estado: setSelectedEstado,
@@ -29,6 +43,23 @@ export const FilterComponent = () => {
     }));
   };
 
+
+  const handleTipoChange = (tipo) => {
+    setSelectedTipo(tipo);
+    setSelectedBrands(
+      marcasDefault[tipo]?.reduce((acc, marca) => {
+        acc[marca] = false; 
+        return acc;
+      }, {})
+    );
+    setSelectedCategorias(
+      categoriasDefault[tipo]?.reduce((acc, categoria) => {
+        acc[categoria] = false;
+        return acc;
+      }, {})
+    );
+  };
+
   return (
     <section className="w-[308px] bg-white p-[30px]">
       <h2 className="text-dark-gray-2 pb-5 font-bold">Filtrar por</h2>
@@ -36,12 +67,12 @@ export const FilterComponent = () => {
       <form className="pt-5">
         <section>
           <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Tipo</h3>
-          <div className="flex gap-2 ml-[-22px]">
+          <div className="flex gap-2 ml-[-15px]">
             {tipos.map((tipo) => (
               <label
                 key={tipo}
                 htmlFor={tipo}
-                className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
+                className="text-dark-gray-2 text-xs font-medium flex items-center cursor-pointer mb-2.5"
               >
                 <input
                   type="radio"
@@ -49,7 +80,7 @@ export const FilterComponent = () => {
                   name="tipo"
                   className="hidden peer"
                   checked={selectedTipo === tipo}
-                  onChange={() => setSelectedTipo(tipo)}
+                  onChange={() => handleTipoChange(tipo)}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-full">
                   {selectedTipo === tipo && (
@@ -62,36 +93,34 @@ export const FilterComponent = () => {
           </div>
         </section>
 
-        <section>
-          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
-          {marcas.map((marca) => (
-            <label
-              key={marca}
-              htmlFor={marca}
-              className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
-            >
-              <input
-                type="checkbox"
-                id={marca}
-                className="hidden peer"
-                checked={!!selectedBrands[marca]}
-                onChange={() => handleCheckboxChange(marca, "marcas")}
-              />
-              <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                {selectedBrands[marca] && (
-                  <CheckSVG className="w-full h-full" />
-                )}
-              </span>
-              {marca}
-            </label>
-          ))}
-        </section>
+        {selectedTipo && (
+          <section>
+            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
+            {Object.keys(selectedBrands).map((marca) => (
+              <label
+                key={marca}
+                htmlFor={marca}
+                className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
+              >
+                <input
+                  type="checkbox"
+                  id={marca}
+                  className="hidden peer"
+                  checked={!!selectedBrands[marca]}
+                  onChange={() => handleCheckboxChange(marca, "marcas")}
+                />
+                <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
+                  {selectedBrands[marca] && <CheckSVG className="w-full h-full" />}
+                </span>
+                {marca}
+              </label>
+            ))}
+          </section>
+        )}
 
         <section className="mt-5">
-          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
-            Categoria
-          </h3>
-          {categorias.map((categoria) => (
+          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Categoria</h3>
+          {Object.keys(selectedCategorias).map((categoria) => (
             <label
               key={categoria}
               htmlFor={categoria}
@@ -105,15 +134,14 @@ export const FilterComponent = () => {
                 onChange={() => handleCheckboxChange(categoria, "categorias")}
               />
               <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                {selectedCategorias[categoria] && (
-                  <CheckSVG className="w-full h-full" />
-                )}
+                {selectedCategorias[categoria] && <CheckSVG className="w-full h-full" />}
               </span>
               {categoria}
             </label>
           ))}
         </section>
 
+        {selectedTipo != "Fone" && (
         <section className="mt-5">
           <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Gênero</h3>
           {genero.map((item) => (
@@ -136,6 +164,7 @@ export const FilterComponent = () => {
             </label>
           ))}
         </section>
+        )}
 
         <section className="mt-5">
           <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Estado</h3>
