@@ -31,7 +31,7 @@ export const Products = () => {
         <Loader />
       ) : (
         <section className="bg-light-gray-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 cel:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {produtos.map((produto) => (
               <ProductCard key={produto.id} produto={produto} />
             ))}

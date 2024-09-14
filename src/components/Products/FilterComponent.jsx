@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { CheckSVG } from "./CheckSVG.jsx";
 import { RadioSVG } from "./RadioSVG.jsx";
@@ -19,14 +20,14 @@ const genero = ["Masculino", "Feminino", "Unissex"];
 const estado = ["Novo", "Usado"];
 
 export const FilterComponent = ({ onTipoChange }) => {
-  const [selectedTipo, setSelectedTipo] = useState('Tênis');
+  const [selectedTipo, setSelectedTipo] = useState("Tênis");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});
   const [selectedEstado, setSelectedEstado] = useState({});
 
   useEffect(() => {
-    console.log('Atualizando marcas e categorias para:', selectedTipo);
+    console.log("Atualizando marcas e categorias para:", selectedTipo);
     setSelectedBrands(
       marcasDefault[selectedTipo]?.reduce((acc, marca) => {
         acc[marca] = false;
@@ -61,13 +62,13 @@ export const FilterComponent = ({ onTipoChange }) => {
   };
 
   const handleTipoChange = (tipo) => {
-    console.log('Mudando tipo para:', tipo);
-    setSelectedTipo(tipo); // Atualiza o estado local
-    onTipoChange(tipo); // Notifica o componente pai
+    console.log("Mudando tipo para:", tipo);
+    setSelectedTipo(tipo);
+    onTipoChange(tipo);
   };
 
   return (
-    <section className="w-[308px] bg-white p-[30px]">
+    <section className="w-[308px] bg-white p-[30px] hidden cel:block">
       <h2 className="text-dark-gray-2 pb-5 font-bold">Filtrar por</h2>
       <hr />
       <form className="pt-5">
@@ -88,8 +89,14 @@ export const FilterComponent = ({ onTipoChange }) => {
                   checked={selectedTipo === tipo}
                   onChange={() => handleTipoChange(tipo)}
                 />
-                <span className={`w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-full ${selectedTipo === tipo ? 'bg-primary' : ''}`}>
-                  {selectedTipo === tipo && <RadioSVG className="w-full h-full text-white" />}
+                <span
+                  className={`w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-full ${
+                    selectedTipo === tipo ? "bg-primary" : ""
+                  }`}
+                >
+                  {selectedTipo === tipo && (
+                    <RadioSVG className="w-full h-full text-white" />
+                  )}
                 </span>
                 {tipo}
               </label>
@@ -114,7 +121,9 @@ export const FilterComponent = ({ onTipoChange }) => {
                   onChange={() => handleCheckboxChange(marca, "marcas")}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                  {selectedBrands[marca] && <CheckSVG className="w-full h-full" />}
+                  {selectedBrands[marca] && (
+                    <CheckSVG className="w-full h-full" />
+                  )}
                 </span>
                 {marca}
               </label>
@@ -123,7 +132,9 @@ export const FilterComponent = ({ onTipoChange }) => {
         )}
 
         <section className="mt-5">
-          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Categoria</h3>
+          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
+            Categoria
+          </h3>
           {Object.keys(selectedCategorias).map((categoria) => (
             <label
               key={categoria}
@@ -138,7 +149,9 @@ export const FilterComponent = ({ onTipoChange }) => {
                 onChange={() => handleCheckboxChange(categoria, "categorias")}
               />
               <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                {selectedCategorias[categoria] && <CheckSVG className="w-full h-full" />}
+                {selectedCategorias[categoria] && (
+                  <CheckSVG className="w-full h-full" />
+                )}
               </span>
               {categoria}
             </label>
@@ -147,7 +160,9 @@ export const FilterComponent = ({ onTipoChange }) => {
 
         {selectedTipo !== "Fone" && (
           <section className="mt-5">
-            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Gênero</h3>
+            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
+              Gênero
+            </h3>
             {genero.map((item) => (
               <label
                 key={item}
@@ -162,7 +177,9 @@ export const FilterComponent = ({ onTipoChange }) => {
                   onChange={() => handleCheckboxChange(item, "genero")}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                  {selectedGenero[item] && <CheckSVG className="w-full h-full" />}
+                  {selectedGenero[item] && (
+                    <CheckSVG className="w-full h-full" />
+                  )}
                 </span>
                 {item}
               </label>
@@ -172,7 +189,9 @@ export const FilterComponent = ({ onTipoChange }) => {
 
         {selectedTipo !== "Fone" && (
           <section className="mt-5">
-            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Estado</h3>
+            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
+              Estado
+            </h3>
             {estado.map((item) => (
               <label
                 key={item}
@@ -187,7 +206,9 @@ export const FilterComponent = ({ onTipoChange }) => {
                   onChange={() => handleCheckboxChange(item, "estado")}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                  {selectedEstado[item] && <CheckSVG className="w-full h-full" />}
+                  {selectedEstado[item] && (
+                    <CheckSVG className="w-full h-full" />
+                  )}
                 </span>
                 {item}
               </label>

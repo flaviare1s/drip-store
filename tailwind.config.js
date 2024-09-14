@@ -35,6 +35,9 @@ export default {
         white: "#FFFFFF",
         bright_yellow: "#E7FF86",
       },
+      screens: {
+        cel: "760px",
+      }
     },
   },
   plugins: [],
