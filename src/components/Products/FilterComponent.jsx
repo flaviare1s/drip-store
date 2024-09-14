@@ -68,7 +68,7 @@ export const FilterComponent = ({ onTipoChange }) => {
   };
 
   return (
-    <section className="w-[308px] bg-white p-[30px] hidden cel:block">
+    <section className="w-[308px] bg-white p-[30px]">
       <h2 className="text-dark-gray-2 pb-5 font-bold">Filtrar por</h2>
       <hr />
       <form className="pt-5">
