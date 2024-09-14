@@ -35,9 +35,11 @@ export const ProductCard = ({ produto }) => {
             {produto.tipo}
           </p>
         </div>
-        <p className="text-dark-gray-2 font-medium md:font-normal text-sm md:text-xl lg:text-2xl">
-          {produto.marca} {produto.nome} - {produto.sexo}
-        </p>
+        <div className="flex w-full justify-start">
+          <p className="text-dark-gray-2 font-medium md:font-normal text-sm md:text-xl lg:text-2xl text-left">
+            {produto.marca} {produto.nome} - {produto.sexo}
+          </p>
+        </div>
         <div className="flex items-start justify-start w-full">
           {produto.desconto && produto.desconto > 0 && (
             <div className="flex">
