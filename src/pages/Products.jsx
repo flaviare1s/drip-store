@@ -66,8 +66,8 @@ export const Products = () => {
   };
 
   return (
-    <section className="px-5 bg-purple-50 lg:px-[100px] lg:pb-[80px] py-10">
-      <div className="flex gap-2.5 justify-center items-center cel:justify-end w-full mb-10">
+    <section className="px-5 bg-purple-50 lg:px-[100px] lg:pb-[80px] py-10 md:relative">
+      <div className="flex gap-2.5 justify-center items-center cel:justify-end w-full mb-5">
         <select
           name="relevancia"
           id="relevancia"
@@ -90,6 +90,9 @@ export const Products = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="mb-5 md:absolute md:top-[50px]">
+        <p className="font-bold text-sm">Resultados para {tipoSelecionado} - <span className="font-normal">{produtos.length} produtos</span></p>
       </div>
       <section className="flex flex-col md:flex-row md:gap-7">
         <div className="hidden cel:block">
