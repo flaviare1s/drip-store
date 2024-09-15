@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
 import { db } from "./config";
 
 export const produtosCol = collection(db, "produtos");
@@ -72,6 +72,30 @@ export async function getProdutosMarca(marca) {
 
 export async function getProdutosGenero(sexo) {
   const filtro = query(produtosCol, where("sexo", "==", sexo));
+  const snapshot = await getDocs(filtro);
+  const produtos = [];
+
+  snapshot.forEach((doc) => {
+    produtos.push({ ...doc.data(), id: doc.id });
+  });
+
+  return produtos;
+}
+
+export async function getProdutosComDesconto() {
+  const filtro = query(produtosCol, where("desconto", ">", 0));
+  const snapshot = await getDocs(filtro);
+  const produtos = [];
+
+  snapshot.forEach((doc) => {
+    produtos.push({ ...doc.data(), id: doc.id });
+  });
+
+  return produtos;
+}
+
+export async function getProdutosOrdenadosPorPreco(ordem = "asc") {
+  const filtro = query(produtosCol, orderBy("preco", ordem));
   const snapshot = await getDocs(filtro);
   const produtos = [];
 

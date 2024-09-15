@@ -27,7 +27,6 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
   const [selectedEstado, setSelectedEstado] = useState({});
 
   useEffect(() => {
-    console.log("Atualizando marcas e categorias para:", selectedTipo);
     setSelectedBrands(
       marcasDefault[selectedTipo]?.reduce((acc, marca) => {
         acc[marca] = false;
@@ -62,7 +61,6 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
   };
 
   const handleTipoChange = (tipo) => {
-    console.log("Mudando tipo para:", tipo);
     setSelectedTipo(tipo);
     onTipoChange(tipo);
   };
