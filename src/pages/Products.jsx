@@ -22,7 +22,11 @@ export const Products = () => {
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 
   const handleClickOutside = (event) => {
-    if (filterRef.current && !filterRef.current.contains(event.target)) {
+    if (
+      filterRef.current &&
+      !filterRef.current.contains(event.target) &&
+      !event.target.closest(".filter-button")
+    ) {
       setIsFilterOpen(false);
     }
   };
@@ -80,7 +84,7 @@ export const Products = () => {
           <option value="preco">Ordenar por: preço </option>
           <option value="desconto">Ordenar por: mais relevantes</option>
         </select>
-        <button onClick={toggleFilter} className="cel:hidden">
+        <button onClick={toggleFilter} className="cel:hidden filter-button">
           <FilterIcon />
         </button>
         {isFilterOpen && (
