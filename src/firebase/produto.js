@@ -90,31 +90,59 @@ export async function getProdutosGenero(sexo) {
   return produtos;
 }
 
-export async function getProdutosComDesconto() {
-  const filtro = query(
-    produtosCol,
-    where("desconto", ">", 0),
-    orderBy("desconto", "desc")
-  );
+export async function getProdutosComDesconto(tipo) {
+  try {
+    if (!tipo) {
+      throw new Error("O tipo não pode estar vazio.");
+    }
 
-  const snapshot = await getDocs(filtro);
-  const produtos = [];
+    const filtro = query(
+      produtosCol,
+      where("tipo", "==", tipo),
+      where("desconto", ">", 0),
+      orderBy("desconto", "desc")
+    );
 
-  snapshot.forEach((doc) => {
-    produtos.push({ ...doc.data(), id: doc.id });
-  });
+    const snapshot = await getDocs(filtro);
+    const produtos = [];
 
-  return produtos;
+    snapshot.forEach((doc) => {
+      produtos.push({ ...doc.data(), id: doc.id });
+    });
+
+    return produtos;
+  } catch (error) {
+    console.error("Erro ao buscar produtos com desconto:", error);
+    return [];
+  }
 }
 
-export async function getProdutosOrdenadosPorPreco(ordem = "asc") {
-  const filtro = query(produtosCol, orderBy("preco", ordem));
-  const snapshot = await getDocs(filtro);
-  const produtos = [];
+export async function getProdutosOrdenadosPorPreco(ordem = "asc", tipo) {
+  try {
+    if (!tipo) {
+      throw new Error("O tipo não pode estar vazio.");
+    }
 
-  snapshot.forEach((doc) => {
-    produtos.push({ ...doc.data(), id: doc.id });
-  });
+    const filtro = query(
+      produtosCol,
+      where("tipo", "==", tipo),
+      orderBy("preco", ordem)
+    );
 
-  return produtos;
+    const snapshot = await getDocs(filtro);
+    const produtos = [];
+
+    if (snapshot.empty) {
+      console.log("Nenhum produto encontrado para o tipo especificado.");
+    }
+
+    snapshot.forEach((doc) => {
+      produtos.push({ ...doc.data(), id: doc.id });
+    });
+
+    return produtos;
+  } catch (error) {
+    console.error("Erro ao buscar produtos ordenados por preço:", error);
+    return [];
+  }
 }

@@ -14,7 +14,7 @@ export const Products = () => {
   const [tipoSelecionado, setTipoSelecionado] = useState("Tênis");
   const [loading, setLoading] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [ordenacao, setOrdenacao] = useState("");
+  const [ordenacao, setOrdenacao] = useState("preco");
   const filterRef = useRef(null);
 
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
@@ -30,9 +30,9 @@ export const Products = () => {
       try {
         let produtosData = [];
         if (ordenacao === "preco") {
-          produtosData = await getProdutosOrdenadosPorPreco("asc");
+          produtosData = await getProdutosOrdenadosPorPreco("asc", tipoSelecionado);
         } else if (ordenacao === "desconto") {
-          produtosData = await getProdutosComDesconto();
+          produtosData = await getProdutosComDesconto(tipoSelecionado);
         } else {
           produtosData = await getProdutosTipo(tipoSelecionado);
         }
@@ -72,8 +72,8 @@ export const Products = () => {
           className="h-[60px] bg-purple-50 border border-dark-gray-2 rounded p-2 w-full cel:w-[332px]"
           onChange={handleOrdenacaoChange}
         >
-          <option value="desconto">Ordenar por: mais relevantes</option>
           <option value="preco">Ordenar por: preço </option>
+          <option value="desconto">Ordenar por: mais relevantes</option>
         </select>
         <button onClick={toggleFilter} className="cel:hidden">
           <FilterIcon />
