@@ -19,7 +19,7 @@ const categoriasDefault = {
 const genero = ["Masculino", "Feminino", "Unissex"];
 const estado = ["Novo", "Usado"];
 
-export const FilterComponent = ({ onTipoChange }) => {
+export const FilterComponent = ({ onTipoChange, onClick }) => {
   const [selectedTipo, setSelectedTipo] = useState("Tênis");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
@@ -68,7 +68,8 @@ export const FilterComponent = ({ onTipoChange }) => {
   };
 
   return (
-    <section className="w-[308px] bg-white p-[30px]">
+    <section className="w-[308px] bg-white p-[30px] relative">
+      <button onClick={onClick} className="absolute right-[-30px] top-[-30px] p-[30px] font-bold text-primary text-lg cel:hidden">X</button>
       <h2 className="text-dark-gray-2 pb-5 font-bold">Filtrar por</h2>
       <hr />
       <form className="pt-5">
