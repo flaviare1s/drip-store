@@ -67,7 +67,12 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
 
   return (
     <section className="w-[308px] bg-white p-[30px] relative">
-      <button onClick={onClick} className="absolute right-[-30px] top-[-30px] p-[30px] font-bold text-primary text-lg cel:hidden">X</button>
+      <button
+        onClick={onClick}
+        className="absolute right-[-30px] top-[-30px] p-[30px] font-bold text-primary text-lg cel:hidden"
+      >
+        X
+      </button>
       <h2 className="text-dark-gray-2 pb-5 font-bold">Filtrar por</h2>
       <hr />
       <form className="pt-5">

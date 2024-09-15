@@ -1,37 +1,45 @@
-import { collection, doc, getDoc, getDocs, orderBy, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "./config";
 
 export const produtosCol = collection(db, "produtos");
 
 export async function getProdutos() {
-  const snapshot = await getDocs(produtosCol)
-  const produtos = []
+  const snapshot = await getDocs(produtosCol);
+  const produtos = [];
 
   snapshot.forEach((doc) => {
-    produtos.push({...doc.data(), id: doc.id})
-  })
+    produtos.push({ ...doc.data(), id: doc.id });
+  });
 
-  return produtos
+  return produtos;
 }
 
 export async function getProduto(id) {
-  const produtoDoc = doc(produtosCol, id)
+  const produtoDoc = doc(produtosCol, id);
 
-  const produto = await getDoc(produtoDoc)
+  const produto = await getDoc(produtoDoc);
 
   return { ...produto.data(), id: produto.id };
 }
 
 export async function getProdutosTipo(tipo) {
-  const filtro = query(produtosCol, where("tipo", "==", tipo))
-  const snapshot = await getDocs(filtro)
-  const produtos = []
+  const filtro = query(produtosCol, where("tipo", "==", tipo));
+  const snapshot = await getDocs(filtro);
+  const produtos = [];
 
   snapshot.forEach((doc) => {
-    produtos.push({...doc.data(), id: doc.id})
-  })
+    produtos.push({ ...doc.data(), id: doc.id });
+  });
 
-  return produtos
+  return produtos;
 }
 
 export async function getProdutosCategoria(categoria) {
@@ -83,7 +91,12 @@ export async function getProdutosGenero(sexo) {
 }
 
 export async function getProdutosComDesconto() {
-  const filtro = query(produtosCol, where("desconto", ">", 0));
+  const filtro = query(
+    produtosCol,
+    where("desconto", ">", 0),
+    orderBy("desconto", "desc")
+  );
+
   const snapshot = await getDocs(filtro);
   const produtos = [];
 

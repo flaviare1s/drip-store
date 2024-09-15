@@ -1,4 +1,8 @@
-import { getProdutosTipo } from "../firebase/produto.js";
+import {
+  getProdutosComDesconto,
+  getProdutosOrdenadosPorPreco,
+  getProdutosTipo,
+} from "../firebase/produto.js";
 import { ProductCard } from "../components/Home/FeatureProductList/ProductCard.jsx";
 import { useState, useEffect, useRef } from "react";
 import { Loader } from "../components/Loader.jsx";
@@ -10,9 +14,10 @@ export const Products = () => {
   const [tipoSelecionado, setTipoSelecionado] = useState("Tênis");
   const [loading, setLoading] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [ordenacao, setOrdenacao] = useState("");
   const filterRef = useRef(null);
 
-  const toggleFilter = () => setIsFilterOpen(prev => !prev);
+  const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 
   const handleClickOutside = (event) => {
     if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -23,7 +28,14 @@ export const Products = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const produtosData = await getProdutosTipo(tipoSelecionado);
+        let produtosData = [];
+        if (ordenacao === "preco") {
+          produtosData = await getProdutosOrdenadosPorPreco("asc");
+        } else if (ordenacao === "desconto") {
+          produtosData = await getProdutosComDesconto();
+        } else {
+          produtosData = await getProdutosTipo(tipoSelecionado);
+        }
         setProdutos(produtosData);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -33,24 +45,33 @@ export const Products = () => {
     };
 
     fetchProdutos();
-  }, [tipoSelecionado]);
+  }, [tipoSelecionado, ordenacao]);
 
   useEffect(() => {
     if (isFilterOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isFilterOpen]);
+
+  const handleOrdenacaoChange = (event) => {
+    setOrdenacao(event.target.value);
+  };
 
   return (
     <section className="px-5 bg-purple-50 lg:px-[100px] lg:pb-[80px] py-10">
       <div className="flex gap-2.5 justify-center items-center cel:justify-end w-full mb-10">
-        <select name="relevancia" id="relevancia" className="h-[60px] bg-purple-50 border border-dark-gray-2 rounded p-2 w-full cel:w-[332px]">
+        <select
+          name="relevancia"
+          id="relevancia"
+          className="h-[60px] bg-purple-50 border border-dark-gray-2 rounded p-2 w-full cel:w-[332px]"
+          onChange={handleOrdenacaoChange}
+        >
           <option value="desconto">Ordenar por: mais relevantes</option>
           <option value="preco">Ordenar por: preço </option>
         </select>
@@ -60,7 +81,10 @@ export const Products = () => {
         {isFilterOpen && (
           <div className="fixed left-[30px] top-[220px] sm:top-[280px] bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
             <div ref={filterRef} className="bg-white shadow-lg p-4 cel:hidden">
-              <FilterComponent onTipoChange={setTipoSelecionado} onClick={toggleFilter} />
+              <FilterComponent
+                onTipoChange={setTipoSelecionado}
+                onClick={toggleFilter}
+              />
             </div>
           </div>
         )}
