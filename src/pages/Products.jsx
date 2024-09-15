@@ -17,7 +17,7 @@ export const Products = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [ordenacao, setOrdenacao] = useState("preco");
   const filterRef = useRef(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 
@@ -32,7 +32,10 @@ export const Products = () => {
       try {
         let produtosData = [];
         if (ordenacao === "preco") {
-          produtosData = await getProdutosOrdenadosPorPreco("asc", tipoSelecionado);
+          produtosData = await getProdutosOrdenadosPorPreco(
+            "asc",
+            tipoSelecionado
+          );
         } else if (ordenacao === "desconto") {
           produtosData = await getProdutosComDesconto(tipoSelecionado);
         } else {
@@ -92,7 +95,10 @@ export const Products = () => {
         )}
       </div>
       <div className="mb-5 md:absolute md:top-[50px]">
-        <p className="font-bold text-sm">Resultados para {tipoSelecionado} - <span className="font-normal">{produtos.length} produtos</span></p>
+        <p className="font-bold text-sm">
+          Resultados para {tipoSelecionado} -{" "}
+          <span className="font-normal">{produtos.length} produtos</span>
+        </p>
       </div>
       <section className="flex flex-col md:flex-row md:gap-7">
         <div className="hidden cel:block">
@@ -110,7 +116,12 @@ export const Products = () => {
           </section>
         )}
       </section>
-      <button onClick={() => navigate(-1)} className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar</button>
+      <button
+        onClick={() => navigate(-1)}
+        className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold"
+      >
+        ← Voltar
+      </button>
     </section>
   );
 };

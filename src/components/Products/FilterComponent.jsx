@@ -20,25 +20,30 @@ const genero = ["Masculino", "Feminino", "Unissex"];
 const estado = ["Novo", "Usado"];
 
 export const FilterComponent = ({ onTipoChange, onClick }) => {
-  const [selectedTipo, setSelectedTipo] = useState("Tênis");
+  const [selectedTipo, setSelectedTipo] = useState(() => {
+    return localStorage.getItem("selectedTipo") || "Tênis";
+  });
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});
   const [selectedEstado, setSelectedEstado] = useState({});
 
   useEffect(() => {
-    setSelectedBrands(
-      marcasDefault[selectedTipo]?.reduce((acc, marca) => {
-        acc[marca] = false;
-        return acc;
-      }, {})
-    );
-    setSelectedCategorias(
-      categoriasDefault[selectedTipo]?.reduce((acc, categoria) => {
-        acc[categoria] = false;
-        return acc;
-      }, {})
-    );
+    localStorage.setItem("selectedTipo", selectedTipo);
+    if (selectedTipo) {
+      setSelectedBrands(
+        marcasDefault[selectedTipo]?.reduce((acc, marca) => {
+          acc[marca] = false;
+          return acc;
+        }, {})
+      );
+      setSelectedCategorias(
+        categoriasDefault[selectedTipo]?.reduce((acc, categoria) => {
+          acc[categoria] = false;
+          return acc;
+        }, {})
+      );
+    }
   }, [selectedTipo]);
 
   const handleCheckboxChange = (item, type) => {
