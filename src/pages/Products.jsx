@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import { Loader } from "../components/Loader.jsx";
 import { FilterComponent } from "../components/Products/FilterComponent.jsx";
 import { FilterIcon } from "../components/Products/FilterIcon.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Products = () => {
   const [produtos, setProdutos] = useState([]);
@@ -16,6 +17,7 @@ export const Products = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [ordenacao, setOrdenacao] = useState("preco");
   const filterRef = useRef(null);
+  const navigate = useNavigate()
 
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 
@@ -105,6 +107,7 @@ export const Products = () => {
           </section>
         )}
       </section>
+      <button onClick={() => navigate(-1)} className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar</button>
     </section>
   );
 };

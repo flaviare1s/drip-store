@@ -10,9 +10,9 @@ export const HighHighlightSection = () => {
         Coleções em destaque
       </h2>
       <section className="flex flex-col lg:flex-row gap-3 justify-evenly">
-        <HighHighlightItem title="Novo drop Supreme" imagem={camisa} />
-        <HighHighlightItem title="Coleção Adidas" imagem={tenis} />
-        <HighHighlightItem title="Novo Beat Bass" imagem={fone} />
+        <HighHighlightItem title="Novo drop Supreme" imagem={camisa} ctaLink="/products/AB9jh8TDbHyuH7r10mdx" />
+        <HighHighlightItem title="Coleção Adidas" imagem={tenis} ctaLink="/products/jYTFuolzfqXHkS2p83gk" />
+        <HighHighlightItem title="Novo Beat Bass" imagem={fone} ctaLink="/products/KyFP35RLFFXiKgx8BH0h" />
       </section>
     </section>
   );
