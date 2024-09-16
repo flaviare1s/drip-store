@@ -1,8 +1,4 @@
-import {
-  getProdutosComDesconto,
-  getProdutosOrdenadosPorPreco,
-  getProdutosTipo,
-} from "../firebase/produto.js";
+import { getProdutos } from "../firebase/produto.js";
 import { ProductCard } from "../components/Home/FeatureProductList/ProductCard.jsx";
 import { useState, useEffect, useRef } from "react";
 import { Loader } from "../components/Loader.jsx";
@@ -13,9 +9,14 @@ import { useNavigate } from "react-router-dom";
 export const Products = () => {
   const [produtos, setProdutos] = useState([]);
   const [tipoSelecionado, setTipoSelecionado] = useState("Tênis");
+  const [selectedBrands, setSelectedBrands] = useState({});
+  const [selectedCategorias, setSelectedCategorias] = useState({});
+  const [selectedGenero, setSelectedGenero] = useState({});
+  const [selectedEstado, setSelectedEstado] = useState({});
   const [loading, setLoading] = useState(true);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [ordenacao, setOrdenacao] = useState("preco");
+  const [mensagem, setMensagem] = useState("");
   const filterRef = useRef(null);
   const navigate = useNavigate();
 
@@ -33,19 +34,70 @@ export const Products = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
+      setLoading(true);
       try {
-        let produtosData = [];
-        if (ordenacao === "preco") {
-          produtosData = await getProdutosOrdenadosPorPreco(
-            "asc",
-            tipoSelecionado
+        let produtosData = await getProdutos();
+
+        // Filtragem por Tipo
+        if (tipoSelecionado) {
+          produtosData = produtosData.filter(
+            (produto) => produto.tipo === tipoSelecionado
           );
-        } else if (ordenacao === "desconto") {
-          produtosData = await getProdutosComDesconto(tipoSelecionado);
-        } else {
-          produtosData = await getProdutosTipo(tipoSelecionado);
         }
+
+        // Filtragem por Gênero
+        if (Object.values(selectedGenero).some(Boolean)) {
+          const generosSelecionados = Object.keys(selectedGenero).filter(
+            (gen) => selectedGenero[gen]
+          );
+          produtosData = produtosData.filter((produto) =>
+            generosSelecionados.includes(produto.sexo)
+          );
+        }
+
+        // Filtragem por Categoria
+        if (Object.values(selectedCategorias).some(Boolean)) {
+          const categoriasSelecionadas = Object.keys(selectedCategorias).filter(
+            (categoria) => selectedCategorias[categoria]
+          );
+          produtosData = produtosData.filter((produto) =>
+            categoriasSelecionadas.includes(produto.categoria)
+          );
+        }
+
+        // Filtragem por Marca
+        if (Object.values(selectedBrands).some(Boolean)) {
+          const marcasSelecionadas = Object.keys(selectedBrands).filter(
+            (brand) => selectedBrands[brand]
+          );
+          produtosData = produtosData.filter((produto) =>
+            marcasSelecionadas.includes(produto.marca)
+          );
+        }
+
+        // Filtragem por Estado
+        if (Object.values(selectedEstado).some(Boolean)) {
+          const estadosSelecionados = Object.keys(selectedEstado).filter(
+            (estado) => selectedEstado[estado]
+          );
+          produtosData = produtosData.filter((produto) =>
+            estadosSelecionados.includes(produto.estado)
+          );
+        }
+
+        // Ordenação
+        if (ordenacao === "preco") {
+          produtosData = produtosData.sort((a, b) => a.preco - b.preco);
+        } else if (ordenacao === "desconto") {
+          produtosData = produtosData.sort((a, b) => b.desconto - a.desconto);
+        }
+
         setProdutos(produtosData);
+        if (produtosData.length === 0) {
+          setMensagem("Não foram encontrados produtos com essas especificidades.");
+        } else {
+          setMensagem("");
+        }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
       } finally {
@@ -54,7 +106,14 @@ export const Products = () => {
     };
 
     fetchProdutos();
-  }, [tipoSelecionado, ordenacao]);
+  }, [
+    tipoSelecionado,
+    ordenacao,
+    selectedGenero,
+    selectedCategorias,
+    selectedBrands,
+    selectedEstado,
+  ]);
 
   useEffect(() => {
     if (isFilterOpen) {
@@ -92,6 +151,10 @@ export const Products = () => {
             <div ref={filterRef} className="bg-white shadow-lg p-4 cel:hidden">
               <FilterComponent
                 onTipoChange={setTipoSelecionado}
+                onBrandsChange={setSelectedBrands}
+                onCategoriasChange={setSelectedCategorias}
+                onGeneroChange={setSelectedGenero}
+                onEstadoChange={setSelectedEstado}
                 onClick={toggleFilter}
               />
             </div>
@@ -103,10 +166,17 @@ export const Products = () => {
           Resultados para {tipoSelecionado} -{" "}
           <span className="font-normal">{produtos.length} produtos</span>
         </p>
+        {mensagem && <p className="text-red-500 font-bold mt-2">{mensagem}</p>}
       </div>
       <section className="flex flex-col md:flex-row md:gap-7">
         <div className="hidden cel:block">
-          <FilterComponent onTipoChange={setTipoSelecionado} />
+          <FilterComponent
+            onTipoChange={setTipoSelecionado}
+            onBrandsChange={setSelectedBrands}
+            onCategoriasChange={setSelectedCategorias}
+            onGeneroChange={setSelectedGenero}
+            onEstadoChange={setSelectedEstado}
+          />
         </div>
         {loading ? (
           <Loader />
