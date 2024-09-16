@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css";
 import { HeroSlide } from "./HeroSlide";
@@ -13,7 +13,12 @@ export const Hero = () => {
     <section className="bg-light-gray-3 pb-10">
       <Swiper
         pagination={true}
-        modules={[Pagination]}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
+        modules={[Pagination, Autoplay]}
         className="mySwiper"
         spaceBetween={50}
         slidesPerView={1}
