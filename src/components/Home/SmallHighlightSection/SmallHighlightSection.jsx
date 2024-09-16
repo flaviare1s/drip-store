@@ -17,22 +17,22 @@ export const SmallHighlightSection = () => {
           <SmallHighlightItem
             image={<TenisIcon />}
             name={'Tênis'}
-            ctaLink={'#'}
+            ctaLink={'/products/tipo/sneakers'}
           />
           <SmallHighlightItem
             image={<TShirtIcon />}
             name={'Camisetas'}
-            ctaLink={'#'}
+            ctaLink={'/products/tipo/shirts'}
           />
           <SmallHighlightItem
             image={<PantsIcon />}
             name={'Calças'}
-            ctaLink={'#'}
+            ctaLink={'/products/tipo/pants'}
           />
           <SmallHighlightItem
             image={<HeadphoneIcon />}
             name={'Headphones'}
-            ctaLink={'#'}
+            ctaLink={'/products/tipo/phones'}
           />
         </div>
       </div>
