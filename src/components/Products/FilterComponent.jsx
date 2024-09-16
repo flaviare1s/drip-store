@@ -27,9 +27,7 @@ export const FilterComponent = ({
   onEstadoChange,
   onClick,
 }) => {
-  const [selectedTipo, setSelectedTipo] = useState(() => {
-    return localStorage.getItem("selectedTipo");
-  });
+  const [selectedTipo, setSelectedTipo] = useState("");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Products = () => {
   const [produtos, setProdutos] = useState([]);
-  const [tipoSelecionado, setTipoSelecionado] = useState("Tênis");
+  const [tipoSelecionado, setTipoSelecionado] = useState("");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});
