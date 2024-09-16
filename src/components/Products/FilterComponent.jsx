@@ -34,8 +34,6 @@ export const FilterComponent = ({
   const [selectedEstado, setSelectedEstado] = useState({});
 
   useEffect(() => {
-    localStorage.setItem("selectedTipo", selectedTipo);
-    console.log("Selected Tipo:", selectedTipo);
     if (selectedTipo) {
       setSelectedBrands(
         marcasDefault[selectedTipo]?.reduce((acc, marca) => {
@@ -49,7 +47,21 @@ export const FilterComponent = ({
           return acc;
         }, {})
       );
+    } else {
+      setSelectedBrands(
+        marcasDefault["Tênis"]?.reduce((acc, marca) => {
+          acc[marca] = false;
+          return acc;
+        }, {})
+      );
+      setSelectedCategorias(
+        categoriasDefault["Tênis"]?.reduce((acc, categoria) => {
+          acc[categoria] = false;
+          return acc;
+        }, {})
+      );
     }
+
     setSelectedGenero(
       sexo.reduce((acc, item) => {
         acc[item] = false;
@@ -142,32 +154,30 @@ export const FilterComponent = ({
           </div>
         </section>
 
-        {selectedTipo && (
-          <section>
-            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
-            {Object.keys(selectedBrands).map((marca) => (
-              <label
-                key={marca}
-                htmlFor={marca}
-                className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
-              >
-                <input
-                  type="checkbox"
-                  id={marca}
-                  className="hidden peer"
-                  checked={!!selectedBrands[marca]}
-                  onChange={() => handleBrandsChange(marca)}
-                />
-                <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                  {selectedBrands[marca] && (
-                    <CheckSVG className="w-full h-full" />
-                  )}
-                </span>
-                {marca}
-              </label>
-            ))}
-          </section>
-        )}
+        <section>
+          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
+          {Object.keys(selectedBrands).map((marca) => (
+            <label
+              key={marca}
+              htmlFor={marca}
+              className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
+            >
+              <input
+                type="checkbox"
+                id={marca}
+                className="hidden peer"
+                checked={!!selectedBrands[marca]}
+                onChange={() => handleBrandsChange(marca)}
+              />
+              <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
+                {selectedBrands[marca] && (
+                  <CheckSVG className="w-full h-full" />
+                )}
+              </span>
+              {marca}
+            </label>
+          ))}
+        </section>
 
         <section className="mt-5">
           <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">

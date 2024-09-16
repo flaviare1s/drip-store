@@ -94,7 +94,9 @@ export const Products = () => {
 
         setProdutos(produtosData);
         if (produtosData.length === 0) {
-          setMensagem("Não foram encontrados produtos com essas especificidades.");
+          setMensagem(
+            "Não foram encontrados produtos com essas especificidades."
+          );
         } else {
           setMensagem("");
         }
@@ -147,7 +149,7 @@ export const Products = () => {
           <FilterIcon />
         </button>
         {isFilterOpen && (
-          <div className="fixed left-[20px] top-[220px] sm:top-[280px] bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
+          <div className="absolute left-[20px] top-[220px] sm:top-[280px] bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center">
             <div ref={filterRef} className="bg-white shadow-lg p-4 cel:hidden">
               <FilterComponent
                 onTipoChange={setTipoSelecionado}
