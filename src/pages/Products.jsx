@@ -95,7 +95,7 @@ export const Products = () => {
         setProdutos(produtosData);
         if (produtosData.length === 0) {
           setMensagem(
-            "Não foram encontrados produtos com essas especificidades."
+            "Não foram encontrados produtos com essas especificidades!"
           );
         } else {
           setMensagem("");
@@ -168,7 +168,6 @@ export const Products = () => {
           Resultados para {tipoSelecionado} -{" "}
           <span className="font-normal">{produtos.length} produtos</span>
         </p>
-        {mensagem && <p className="text-red-500 font-bold mt-2">{mensagem}</p>}
       </div>
       <section className="flex flex-col md:flex-row md:gap-7">
         <div className="hidden cel:block">
@@ -183,12 +182,13 @@ export const Products = () => {
         {loading ? (
           <Loader />
         ) : (
-          <section className="bg-light-gray-4">
+          <section className="bg-light-gray-4 w-full">
             <div className="grid grid-cols-2 cel:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {produtos.map((produto) => (
                 <ProductCard key={produto.id} produto={produto} />
               ))}
             </div>
+            {mensagem && <p className="text-red-500 font-bold mt-10 text-center">{mensagem}</p>}
           </section>
         )}
       </section>
