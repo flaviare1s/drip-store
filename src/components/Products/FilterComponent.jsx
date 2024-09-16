@@ -7,7 +7,7 @@ const tipos = ["Tênis", "Camisa", "Calça", "Fone"];
 const marcasDefault = {
   Camisa: ["Adidas", "Nike"],
   Calça: ["Pool", "Taco"],
-  Tênis: ["Adidas", "KSwiss", "Nike", "Mizuno", "Fila"],
+  Tênis: ["Adidas", "K-Swiss", "Nike", "Mizuno", "Fila"],
   Fone: ["Sony", "JBL"],
 };
 const categoriasDefault = {
@@ -16,20 +16,24 @@ const categoriasDefault = {
   Tênis: ["Esporte e Lazer", "Casual", "Utilitário", "Corrida"],
   Fone: ["Headset", "Headphone", "Earphone"],
 };
-const genero = ["Masculino", "Feminino", "Unissex"];
+const sexo = ["Masculino", "Feminino", "Unissex"];
 const estado = ["Novo", "Usado"];
 
-export const FilterComponent = ({ onTipoChange, onClick }) => {
-  const [selectedTipo, setSelectedTipo] = useState(() => {
-    return localStorage.getItem("selectedTipo") || "Tênis";
-  });
+export const FilterComponent = ({
+  onTipoChange,
+  onBrandsChange,
+  onCategoriasChange,
+  onGeneroChange,
+  onEstadoChange,
+  onClick,
+}) => {
+  const [selectedTipo, setSelectedTipo] = useState("");
   const [selectedBrands, setSelectedBrands] = useState({});
   const [selectedCategorias, setSelectedCategorias] = useState({});
   const [selectedGenero, setSelectedGenero] = useState({});
   const [selectedEstado, setSelectedEstado] = useState({});
 
   useEffect(() => {
-    localStorage.setItem("selectedTipo", selectedTipo);
     if (selectedTipo) {
       setSelectedBrands(
         marcasDefault[selectedTipo]?.reduce((acc, marca) => {
@@ -43,31 +47,68 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
           return acc;
         }, {})
       );
-    }
-  }, [selectedTipo]);
-
-  const handleCheckboxChange = (item, type) => {
-    const updater = {
-      marcas: setSelectedBrands,
-      categorias: setSelectedCategorias,
-      genero: setSelectedGenero,
-      estado: setSelectedEstado,
-    };
-
-    const updateFunc = updater[type];
-    if (updateFunc) {
-      updateFunc((prev) => ({
-        ...prev,
-        [item]: !prev[item],
-      }));
     } else {
-      console.error(`Updater function for type "${type}" not found.`);
+      setSelectedBrands(
+        marcasDefault["Tênis"]?.reduce((acc, marca) => {
+          acc[marca] = false;
+          return acc;
+        }, {})
+      );
+      setSelectedCategorias(
+        categoriasDefault["Tênis"]?.reduce((acc, categoria) => {
+          acc[categoria] = false;
+          return acc;
+        }, {})
+      );
     }
-  };
+
+    setSelectedGenero(
+      sexo.reduce((acc, item) => {
+        acc[item] = false;
+        return acc;
+      }, {})
+    );
+    setSelectedEstado(
+      estado.reduce((acc, item) => {
+        acc[item] = false;
+        return acc;
+      }, {})
+    );
+  }, [selectedTipo]);
 
   const handleTipoChange = (tipo) => {
     setSelectedTipo(tipo);
     onTipoChange(tipo);
+    console.log(tipo);
+  };
+
+  const handleBrandsChange = (brand) => {
+    const newBrands = { ...selectedBrands };
+    newBrands[brand] = !newBrands[brand];
+    setSelectedBrands(newBrands);
+    onBrandsChange(newBrands);
+    console.log(newBrands);
+  };
+
+  const handleCategoriasChange = (categoria) => {
+    const newCategorias = { ...selectedCategorias };
+    newCategorias[categoria] = !newCategorias[categoria];
+    setSelectedCategorias(newCategorias);
+    onCategoriasChange(newCategorias);
+  };
+
+  const handleGeneroChange = (sexo) => {
+    const newGenero = { ...selectedGenero };
+    newGenero[sexo] = !newGenero[sexo];
+    setSelectedGenero(newGenero);
+    onGeneroChange(newGenero);
+  };
+
+  const handleEstadoChange = (estado) => {
+    const newEstado = { ...selectedEstado };
+    newEstado[estado] = !newEstado[estado];
+    setSelectedEstado(newEstado);
+    onEstadoChange(newEstado);
   };
 
   return (
@@ -113,32 +154,30 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
           </div>
         </section>
 
-        {selectedTipo && (
-          <section>
-            <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
-            {Object.keys(selectedBrands).map((marca) => (
-              <label
-                key={marca}
-                htmlFor={marca}
-                className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
-              >
-                <input
-                  type="checkbox"
-                  id={marca}
-                  className="hidden peer"
-                  checked={!!selectedBrands[marca]}
-                  onChange={() => handleCheckboxChange(marca, "marcas")}
-                />
-                <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
-                  {selectedBrands[marca] && (
-                    <CheckSVG className="w-full h-full" />
-                  )}
-                </span>
-                {marca}
-              </label>
-            ))}
-          </section>
-        )}
+        <section>
+          <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">Marca</h3>
+          {Object.keys(selectedBrands).map((marca) => (
+            <label
+              key={marca}
+              htmlFor={marca}
+              className="text-dark-gray-2 text-sm font-medium flex items-center cursor-pointer mb-2.5"
+            >
+              <input
+                type="checkbox"
+                id={marca}
+                className="hidden peer"
+                checked={!!selectedBrands[marca]}
+                onChange={() => handleBrandsChange(marca)}
+              />
+              <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
+                {selectedBrands[marca] && (
+                  <CheckSVG className="w-full h-full" />
+                )}
+              </span>
+              {marca}
+            </label>
+          ))}
+        </section>
 
         <section className="mt-5">
           <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
@@ -155,7 +194,7 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
                 id={categoria}
                 className="hidden peer"
                 checked={!!selectedCategorias[categoria]}
-                onChange={() => handleCheckboxChange(categoria, "categorias")}
+                onChange={() => handleCategoriasChange(categoria)}
               />
               <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
                 {selectedCategorias[categoria] && (
@@ -172,7 +211,7 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
             <h3 className="text-dark-gray-2 font-bold text-sm pb-2.5">
               Gênero
             </h3>
-            {genero.map((item) => (
+            {sexo.map((item) => (
               <label
                 key={item}
                 htmlFor={item}
@@ -183,7 +222,7 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
                   id={item}
                   className="hidden peer"
                   checked={!!selectedGenero[item]}
-                  onChange={() => handleCheckboxChange(item, "genero")}
+                  onChange={() => handleGeneroChange(item)}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
                   {selectedGenero[item] && (
@@ -212,7 +251,7 @@ export const FilterComponent = ({ onTipoChange, onClick }) => {
                   id={item}
                   className="hidden peer"
                   checked={!!selectedEstado[item]}
-                  onChange={() => handleCheckboxChange(item, "estado")}
+                  onChange={() => handleEstadoChange(item)}
                 />
                 <span className="w-[21px] h-[21px] mr-2 flex items-center justify-center border border-dark-gray-2 rounded-sm">
                   {selectedEstado[item] && (
