@@ -171,6 +171,7 @@ export const Products = () => {
 
   const handleOrdenacaoChange = (event) => {
     setOrdenacao(event.target.value);
+    setCurrentPage(1);
   };
 
   const totalPages = Math.ceil(produtos.length / itemsPerPage);
