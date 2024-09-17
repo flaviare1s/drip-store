@@ -22,11 +22,6 @@ export const Products = () => {
   const filterRef = useRef(null);
   const navigate = useNavigate();
 
-  const totalPages = Math.ceil(produtos.length / itemsPerPage); 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const produtosPaginados = produtos.slice(startIndex, endIndex);
-
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -107,10 +102,33 @@ export const Products = () => {
         }
 
         // Ordenação
-        if (ordenacao === "preco") {
-          produtosData = produtosData.sort((a, b) => a.preco - b.preco);
-        } else if (ordenacao === "desconto") {
-          produtosData = produtosData.sort((a, b) => b.desconto - a.desconto);
+        if (ordenacao === "desconto") {
+          const produtosComDesconto = produtosData.filter(
+            (produto) => produto.desconto > 0
+          );
+          const produtosSemDesconto = produtosData.filter(
+            (produto) => produto.desconto === 0 || !produto.desconto
+          );
+
+          produtosComDesconto.sort((a, b) => {
+            const descontoA =
+              typeof a.desconto === "number"
+                ? a.desconto
+                : parseFloat(a.desconto);
+            const descontoB =
+              typeof b.desconto === "number"
+                ? b.desconto
+                : parseFloat(b.desconto);
+            return descontoB - descontoA;
+          });
+
+          produtosData = [...produtosComDesconto, ...produtosSemDesconto];
+        } else if (ordenacao === "preco") {
+          produtosData = produtosData.sort((a, b) => {
+            const precoComDescontoA = a.preco - a.preco * (a.desconto || 0);
+            const precoComDescontoB = b.preco - b.preco * (b.desconto || 0);
+            return precoComDescontoA - precoComDescontoB;
+          });
         }
 
         setProdutos(produtosData);
@@ -154,6 +172,11 @@ export const Products = () => {
   const handleOrdenacaoChange = (event) => {
     setOrdenacao(event.target.value);
   };
+
+  const totalPages = Math.ceil(produtos.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const produtosPaginados = produtos.slice(startIndex, endIndex);
 
   return (
     <section className="px-5 bg-purple-50 lg:px-[100px] lg:pb-[80px] py-10 md:relative">
@@ -210,25 +233,35 @@ export const Products = () => {
                 <ProductCard key={produto.id} produto={produto} />
               ))}
             </div>
-            {mensagem && <p className="text-red-500 font-bold mt-10 text-center">{mensagem}</p>}
+            {mensagem && (
+              <p className="text-red-500 font-bold mt-10 text-center">
+                {mensagem}
+              </p>
+            )}
 
-              <div className="flex justify-center items-center mt-10">
-                <button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}
-                  className="bg-gray-300 rounded disabled:opacity-50"
-                >
-                  <span className="material-symbols-outlined py-2 pl-3 pr-1">arrow_back_ios</span>
-                </button>
-                <span className="mx-2">Página {currentPage} de {totalPages}</span>
-                <button
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                  className="bg-gray-300 rounded disabled:opacity-50"
-                >
-                  <span className="material-symbols-outlined p-2">arrow_forward_ios</span>
-                </button>
-              </div>
+            <div className="flex justify-center items-center mt-10">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 1}
+                className="bg-gray-300 rounded disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined py-2 pl-3 pr-1">
+                  arrow_back_ios
+                </span>
+              </button>
+              <span className="mx-2">
+                Página {currentPage} de {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className="bg-gray-300 rounded disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined p-2">
+                  arrow_forward_ios
+                </span>
+              </button>
+            </div>
           </section>
         )}
       </section>
