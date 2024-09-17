@@ -17,8 +17,29 @@ export const Products = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [ordenacao, setOrdenacao] = useState("preco");
   const [mensagem, setMensagem] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
   const filterRef = useRef(null);
   const navigate = useNavigate();
+
+  const totalPages = Math.ceil(produtos.length / itemsPerPage); 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const produtosPaginados = produtos.slice(startIndex, endIndex);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo(0, 0);
+    }
+  };
 
   const toggleFilter = () => setIsFilterOpen((prev) => !prev);
 
@@ -100,6 +121,7 @@ export const Products = () => {
         } else {
           setMensagem("");
         }
+        window.scrollTo(0, 0);
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
       } finally {
@@ -184,11 +206,29 @@ export const Products = () => {
         ) : (
           <section className="bg-light-gray-4 w-full">
             <div className="grid grid-cols-2 cel:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {produtos.map((produto) => (
+              {produtosPaginados.map((produto) => (
                 <ProductCard key={produto.id} produto={produto} />
               ))}
             </div>
             {mensagem && <p className="text-red-500 font-bold mt-10 text-center">{mensagem}</p>}
+
+              <div className="flex justify-center items-center mt-10">
+                <button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                  className="bg-gray-300 rounded disabled:opacity-50"
+                >
+                  <span className="material-symbols-outlined py-2 pl-3 pr-1">arrow_back_ios</span>
+                </button>
+                <span className="mx-2">Página {currentPage} de {totalPages}</span>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  className="bg-gray-300 rounded disabled:opacity-50"
+                >
+                  <span className="material-symbols-outlined p-2">arrow_forward_ios</span>
+                </button>
+              </div>
           </section>
         )}
       </section>
