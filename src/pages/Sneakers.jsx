@@ -28,7 +28,7 @@ export const Sneakers = () => {
 
   return (
     <section className="px-5 bg-purple-50 lg:px-[100px] lg:pb-[80px] py-10 md:relative">
-      <div className="mb-5 md:absolute md:top-[50px]">
+      <div className="mb-5">
         <p className="font-bold text-lg">
           Tênis -{" "}
           <span className="font-normal text-sm">

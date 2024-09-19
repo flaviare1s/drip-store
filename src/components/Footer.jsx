@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png'
 export function Footer() {
   return (
@@ -45,9 +46,9 @@ export function Footer() {
             <a className="hover:opacity-50" href="#">
               Trabalhe conosco
             </a>
-            <a className="hover:opacity-50" href="#">
+            <Link to="/orders" className="hover:opacity-50" href="#">
               Meus Pedidos
-            </a>
+            </Link>
           </ul>
         </div>
 
@@ -56,21 +57,18 @@ export function Footer() {
             Categorias
           </h2>
           <ul className="flex flex-col leading-[31px] lg:leading-[38px]">
-            <a className="hover:opacity-50" href="#">
+            <Link to="/products/tipo/shirts" className="hover:opacity-50" href="#">
               Camisetas
-            </a>
-            <a className="hover:opacity-50" href="#">
+            </Link>
+            <Link to="/products/tipo/pants" className="hover:opacity-50" href="#">
               Calças
-            </a>
-            <a className="hover:opacity-50" href="#">
-              Bonés
-            </a>
-            <a className="hover:opacity-50" href="#">
+            </Link>
+            <Link to="/products/tipo/phones" className="hover:opacity-50" href="#">
               Headphones
-            </a>
-            <a className="hover:opacity-50" href="#">
+            </Link>
+            <Link to="/products/tipo/sneakers" className="hover:opacity-50" href="#">
               Tênis
-            </a>
+            </Link>
           </ul>
         </div>
 
