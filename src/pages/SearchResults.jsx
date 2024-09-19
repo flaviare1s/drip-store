@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { buscarProdutos } from "../firebase/produto.js";
 import { ProductCard } from "../components/Home/FeatureProductList/ProductCard.jsx";
 import { Loader } from "../components/Loader.jsx";
@@ -9,6 +9,7 @@ export const SearchResults = () => {
   const [produtos, setProdutos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mensagem, setMensagem] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -17,7 +18,7 @@ export const SearchResults = () => {
         const resultados = await buscarProdutos(palavraChave);
         setProdutos(resultados);
         if (resultados.length === 0) {
-          setMensagem("Nenhum produto encontrado.");
+          setMensagem("Nenhum produto encontrado!");
         }
       } catch (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -40,7 +41,7 @@ export const SearchResults = () => {
       ) : (
         <>
           {produtos.length === 0 ? (
-            <p>{mensagem}</p>
+            <p className="text-center md:text-2xl py-24">{mensagem}</p>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {produtos.map((produto) => (
@@ -50,6 +51,12 @@ export const SearchResults = () => {
           )}
         </>
       )}
+      <button
+        onClick={() => navigate(-1)}
+        className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold"
+      >
+        ← Voltar
+      </button>
     </section>
   );
 };
