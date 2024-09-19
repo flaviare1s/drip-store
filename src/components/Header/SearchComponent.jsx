@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { SearchIcon } from '../Header/SearchIcon.jsx'
 
-export const SearchComponent = () => {
+export const SearchComponent = ({ onKeyDown }) => {
   return (
     <div className='relative'>
       <label htmlFor="search">
@@ -9,7 +10,9 @@ export const SearchComponent = () => {
           type="search"
           name="search"
           id="search"
-          placeholder="Pesquisar produto..." />
+          placeholder="Pesquisar produto..."
+          onKeyDown={onKeyDown}
+        />
       </label>
       <div className='absolute top-[18px] right-[18px]'>
         <SearchIcon cursor={false} hover={false} />

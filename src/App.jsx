@@ -20,6 +20,7 @@ import { Shirts } from "./pages/Shirts.jsx";
 import { Pants } from "./pages/Pants.jsx";
 import { Sneakers } from "./pages/Sneakers.jsx";
 import { Phones } from "./pages/Phones.jsx";
+import { SearchResults } from "./pages/SearchResults.jsx";
 export function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ export function App() {
             <Route path="products/tipo/phones" element={<Phones />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/checkout" element={<CartCheckout />} />
+            <Route path="search/:palavraChave" element={<SearchResults />} />
           </Routes>
           <Footer />
         </BrowserRouter>

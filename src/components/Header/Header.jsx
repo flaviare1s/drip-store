@@ -10,6 +10,7 @@ import { Overlay } from "./Overlay.jsx";
 import { UserContext } from "../../contexts/UserContext.jsx";
 import { Button } from "../Button.jsx";
 import { logout } from "../../firebase/auth.js";
+import { buscarProdutos } from "../../firebase/produto.js";
 
 export const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -26,7 +27,22 @@ export const Header = () => {
   function handleLogout() {
     logout().then(() => {
       navigate("/login")
-    })
+    }).catch((error) => {
+      console.error("Erro ao fazer logout:", error);
+    });
+  }
+
+  async function busca(event) {
+    if (event.key === 'Enter') {
+      try {
+        const palavraChave = event.target.value;
+        const resultados = await buscarProdutos(palavraChave);
+        console.log("Resultados da busca:", resultados);
+        navigate(`/search/${palavraChave}`);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+      }
+    }
   }
 
   return (
@@ -35,7 +51,7 @@ export const Header = () => {
         <BurguerIcon onClick={toggleMenu} />
         <DigitalLogo setIsMenuOpen={setIsMenuOpen} />
         <div className="hidden lg:block w-full">
-          <SearchComponent />
+          <SearchComponent onKeyDown={busca} />
         </div>
         {!user && (
         <div className="hidden lg:flex gap-3 items-center justify-center">
@@ -73,7 +89,7 @@ export const Header = () => {
           <CartIcon />
         </div>
       </section>
-      {isSearchOpen && <SearchComponent hiddenOnLg={false} />}
+      {isSearchOpen && <SearchComponent hiddenOnLg={false} onKeyDown={busca} />}
       <div className="hidden lg:flex">
         <NavBar />
       </div>
