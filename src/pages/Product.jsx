@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getProduto } from "../firebase/produto.js";
 import { Loader } from "../components/Loader";
 import filledStar from "../assets/filled-star.svg";
 import star from "../assets/star.svg";
+import { auth } from "../firebase/config.js";
+import { adicionarAoCarrinho } from "../firebase/pedido.js";
 
 export const Product = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProduto(id)
@@ -26,6 +29,28 @@ export const Product = () => {
   const preco = parseFloat(produto.preco);
   const desconto = parseFloat(produto.desconto);
   const precoComDesconto = desconto ? (preco * (1 - desconto)).toFixed(2) : preco.toFixed(2);
+
+  const handleComprar = async () => {
+    setLoading(true);
+
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        alert("Você precisa estar logado para fazer uma compra.");
+        navigate("/login");
+        return;
+      }
+
+      await adicionarAoCarrinho(produto);
+      alert("Produto adicionado ao carrinho com sucesso!");
+      navigate("/checkout");
+    } catch (erro) {
+      console.error("Erro ao adicionar ao carrinho:", erro);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="p-5">
@@ -66,7 +91,7 @@ export const Product = () => {
             <p className="text-sm text-light-gray font-bold leading-[22px] tracking-[.75px]">Descrição do poduto:</p>
             <p className="text-dark-gray-2 text-sm">{produto.descricao}</p>
           </div>
-          <Link to="/checkout" className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]">Comprar</Link>
+          <button onClick={handleComprar} disabled={loading} className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]">Comprar</button>
         </div>
       </div>
       <button onClick={() => navigate(-1)} className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar</button>
