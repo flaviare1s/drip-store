@@ -82,16 +82,20 @@ export const CartCheckout = () => {
           <CartCheckoutProduct produtos={produtos} onChangeAmount={handleChangeAmount} />
         </section>
 
-        <div className='flex justify-between text-center'>
-          <div className='w-1/2 block text-left pt-5'>
+        <div className='flex flex-col md:flex-row justify-between text-center'>
+          <div className='w-full md:w-1/2 block text-left pt-5'>
             <p className='text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]'>Cupom de desconto</p>
-            <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px]' type="text" name="desc" id="desc" placeholder='Insira seu código' />
-            <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-tertiary'>OK</button>
+            <div className='flex flex-col md:flex-row gap-2.5'>
+              <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="desc" id="desc" placeholder='Insira seu código' />
+              <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-tertiary h-[60px]'>OK</button>
+            </div>
           </div>
-          <div className='w-1/2 block text-left pt-5'>
+          <div className='w-full md:w-1/2 block text-left pt-5'>
             <p className='text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]'>Calcular frete</p>
-            <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px]' type="text" name="cep" id="cep" placeholder='Insira seu CEP' />
-            <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-tertiary'>OK</button>
+            <div className='flex flex-col md:flex-row gap-2.5'>
+              <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="cep" id="cep" placeholder='Insira seu CEP' />
+              <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-tertiary h-[60px]'>OK</button>
+            </div>
           </div>
         </div>
       </div>
