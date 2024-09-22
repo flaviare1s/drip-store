@@ -25,27 +25,43 @@ export async function adicionarAoCarrinho(produto, pedidoId) {
     const pedidoSnap = await getDoc(pedidoRef);
 
     if (pedidoSnap.exists()) {
-      await updateDoc(pedidoRef, {
-        produtos: arrayUnion({
-          id: produto.id,
-          nome: produto.nome,
-          marca: produto.marca,
-          imagem: produto.imagem,
-          tipo: produto.tipo,
-          categoria: produto.categoria,
-          sexo: produto.sexo,
-          cor: produto.cor,
-          tamanho: produto.tamanho,
-          quantidade: 1,
-          preco: produto.preco,
-          desconto: produto.desconto || 0,
-          precoFinal: produto.desconto
-            ? produto.preco * (1 - produto.desconto)
-            : produto.preco,
-        }),
-      });
+      const produtos = pedidoSnap.data().produtos || [];
+      const produtoExistente = produtos.find((prod) => prod.id === produto.id);
 
-      console.log("Produto adicionado ao pedido com ID: ", pedidoId);
+      if (produtoExistente) {
+        const novaQuantidade = produtoExistente.quantidade + 1;
+        produtoExistente.quantidade = novaQuantidade;
+
+        await updateDoc(pedidoRef, {
+          produtos: produtos,
+        });
+
+        console.log(
+          `Produto ${produto.nome} atualizado para a quantidade ${novaQuantidade}.`
+        );
+      } else {
+        await updateDoc(pedidoRef, {
+          produtos: arrayUnion({
+            id: produto.id,
+            nome: produto.nome,
+            marca: produto.marca,
+            imagem: produto.imagem,
+            tipo: produto.tipo,
+            categoria: produto.categoria,
+            sexo: produto.sexo,
+            cor: produto.cor,
+            tamanho: produto.tamanho,
+            quantidade: 1,
+            preco: produto.preco,
+            desconto: produto.desconto || 0,
+            precoFinal: produto.desconto
+              ? produto.preco * (1 - produto.desconto)
+              : produto.preco,
+          }),
+        });
+
+        console.log("Produto adicionado ao pedido com ID: ", pedidoId);
+      }
     } else {
       throw new Error("Pedido não encontrado.");
     }
@@ -148,7 +164,6 @@ export const atualizarProdutoNoCarrinho = async (
       const produtoIndex = produtos.findIndex((prod) => prod.id === produtoId);
 
       if (produtoIndex > -1) {
-        // Atualiza a quantidade do produto específico
         produtos[produtoIndex].quantidade = novaQuantidade;
 
         await updateDoc(pedidoRef, {
