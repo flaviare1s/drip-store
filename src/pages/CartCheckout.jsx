@@ -65,13 +65,14 @@ export const CartCheckout = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className='flex flex-col justify-between items-start gap-5 p-[30px] md:flex-row'>
-      <div className='w-full md:w-[72%]'>
+    <div className='flex flex-col justify-between items-start gap-5 p-[30px] lg:flex-row'>
+      <div className='w-full lg:w-[72%]'>
         <div className='flex flex-col md:flex-row justify-between w-full pb-5'>
           <div className='w-1/2'>
             <h3 className='text-sm font-bold text-dark-gray-2 leading-[22px]'>MEU CARRINHO</h3>
           </div>
-          <div className='w-1/2 flex justify-between items-center gap-[30px]'>
+          <hr className='bg-light-gray-2 mt-5 md:hidden' />
+          <div className='w-1/2 hidden md:flex justify-between items-center gap-[30px]'>
             <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>QUANTIDADE</h3>
             <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>UNITÁRIO</h3>
             <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>TOTAL</h3>
