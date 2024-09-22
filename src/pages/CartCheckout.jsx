@@ -24,7 +24,7 @@ export const CartCheckout = () => {
           produto.preco * produto.quantidade * (1 - (produto.desconto || 0));
         return acc + precoTotal;
       }, 0)
-      .toFixed(2);
+      .toFixed(2).replace(".", ",");
   };
 
   const subtotal = calcularSubtotal();

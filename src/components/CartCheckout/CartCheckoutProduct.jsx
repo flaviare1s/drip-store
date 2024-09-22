@@ -85,11 +85,11 @@ export const CartCheckoutProduct = ({
                   <div className="flex md:flex-col items-center justify-center gap-4 md:gap-1">
                     {produto.desconto && produto.desconto > 0 ? (
                       <span className="text-center text-sm line-through text-light-gray-2">
-                        R$ {produto.preco.toFixed(2)}
+                        R$ {produto.preco.toFixed(2).replace(".", ",")}
                       </span>
                     ) : null}
                     <span className="text-center font-bold">
-                      R$ {(produto.preco * (1 - produto.desconto)).toFixed(2)}
+                      R$ {(produto.preco * (1 - produto.desconto)).toFixed(2).replace(".", ",")}
                     </span>
                   </div>
                 </div>
@@ -100,7 +100,7 @@ export const CartCheckoutProduct = ({
                   <div className="flex md:flex-col items-center justify-center gap-4 md:gap-1">
                     {produto.desconto && produto.desconto > 0 ? (
                       <span className="text-center text-sm line-through text-light-gray-2">
-                        R$ {(produto.preco * produto.quantidade).toFixed(2)}
+                        R$ {(produto.preco * produto.quantidade).toFixed(2).replace(".", ",")}
                       </span>
                     ) : null}
                     <span className="text-center font-bold">
@@ -109,7 +109,7 @@ export const CartCheckoutProduct = ({
                         produto.preco *
                         (1 - produto.desconto) *
                         produto.quantidade
-                      ).toFixed(2)}
+                      ).toFixed(2).replace(".", ",") }
                     </span>
                   </div>
                 </div>

@@ -33,11 +33,11 @@ export const CartCheckoutResume = ({ subtotal, frete, desconto }) => {
             Total:
           </p>
           <span className="text-error text-lg font-bold leading-[34px]">
-            R$ {total}
+            R$ {(total).replace(".", ",")}
           </span>
         </div>
         <div className="flex justify-end text-light-gray">
-          <small>ou 10x de R$ {(total / 10).toFixed(2)} sem juros</small>
+          <small>ou 10x de R$ {(total / 10).toFixed(2).replace(".", ",")} sem juros</small>
         </div>
       </div>
       <Link
