@@ -189,3 +189,27 @@ export const atualizarProdutoNoCarrinho = async (
     console.error("Erro ao atualizar o produto no carrinho:", erro);
   }
 };
+
+export const removerProdutoDoCarrinho = async (pedidoId, produtoId) => {
+  try {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+    const pedidoSnap = await getDoc(pedidoRef);
+
+    if (pedidoSnap.exists()) {
+      const produtos = pedidoSnap.data().produtos;
+      const produtosAtualizados = produtos.filter(
+        (prod) => prod.id !== produtoId
+      );
+
+      await updateDoc(pedidoRef, {
+        produtos: produtosAtualizados,
+      });
+
+      console.log(`Produto ${produtoId} removido do pedido ${pedidoId}`);
+    } else {
+      throw new Error("Pedido não encontrado.");
+    }
+  } catch (erro) {
+    console.error("Erro ao remover o produto do carrinho:", erro);
+  }
+};

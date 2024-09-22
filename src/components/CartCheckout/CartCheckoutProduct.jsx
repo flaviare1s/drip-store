@@ -71,7 +71,7 @@ export const CartCheckoutProduct = ({
                   </div>
                   <div className="flex items-center justify-center">
                     <button
-                      onClick={handleRemoveItem}
+                      onClick={() => handleRemoveItem(produto.id)}
                       className="text-xs underline text-dark-gray-2 leading-[28px]"
                     >
                       Remover item
