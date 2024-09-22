@@ -73,6 +73,7 @@ export const NavBar = ({ setIsMenuOpen }) => {
 
         {user && (
           <div className="lg:hidden flex flex-col flex-grow items-center justify-center w-full mt-[90px]">
+            <p className="self-start">Olá, {user.displayName}</p>
             <Button title="Logout" onClick={handleLogout} />
           </div>
         )}

@@ -100,7 +100,7 @@ export const CartCheckout = () => {
         </div>
       </div>
       <div className='w-[28%]'>
-        <CartCheckoutResume />
+        <CartCheckoutResume produtos={produtos} />
       </div>
     </div>
   )
