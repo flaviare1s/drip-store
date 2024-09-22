@@ -26,38 +26,46 @@ export async function adicionarAoCarrinho(produto, pedidoId) {
 
     if (pedidoSnap.exists()) {
       const produtos = pedidoSnap.data().produtos || [];
-      const produtoExistente = produtos.find((prod) => prod.id === produto.id);
+      const produtoIndex = produtos.findIndex((prod) => prod.id === produto.id);
 
-      if (produtoExistente) {
-        const novaQuantidade = produtoExistente.quantidade + 1;
-        produtoExistente.quantidade = novaQuantidade;
+      if (produtoIndex > -1) {
+        const novaQuantidade = produtos[produtoIndex].quantidade + 1;
+        produtos[produtoIndex].quantidade = novaQuantidade;
 
         await updateDoc(pedidoRef, {
           produtos: produtos,
         });
 
         console.log(
-          `Produto ${produto.nome} atualizado para a quantidade ${novaQuantidade}.`
+          `Quantidade do produto ${produto.id} atualizada para ${novaQuantidade}.`
         );
       } else {
+        const novoProduto = {
+          id: produto.id,
+          nome: produto.nome,
+          marca: produto.marca,
+          imagem: produto.imagem,
+          tipo: produto.tipo,
+          categoria: produto.categoria,
+          sexo: produto.sexo,
+          cor: produto.cor,
+          tamanho: produto.tamanho,
+          quantidade: 1,
+          preco: produto.preco,
+          desconto: produto.desconto || 0,
+          precoFinal: produto.desconto
+            ? produto.preco * (1 - produto.desconto)
+            : produto.preco,
+        };
+
+        for (const key in novoProduto) {
+          if (novoProduto[key] === undefined) {
+            delete novoProduto[key];
+          }
+        }
+
         await updateDoc(pedidoRef, {
-          produtos: arrayUnion({
-            id: produto.id,
-            nome: produto.nome,
-            marca: produto.marca,
-            imagem: produto.imagem,
-            tipo: produto.tipo,
-            categoria: produto.categoria,
-            sexo: produto.sexo,
-            cor: produto.cor,
-            tamanho: produto.tamanho,
-            quantidade: 1,
-            preco: produto.preco,
-            desconto: produto.desconto || 0,
-            precoFinal: produto.desconto
-              ? produto.preco * (1 - produto.desconto)
-              : produto.preco,
-          }),
+          produtos: arrayUnion(novoProduto),
         });
 
         console.log("Produto adicionado ao pedido com ID: ", pedidoId);

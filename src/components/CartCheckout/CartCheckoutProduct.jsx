@@ -26,19 +26,25 @@ export const CartCheckoutProduct = ({
                 <h4 className="text-sm font-bold leading-[20px] text-dark-gray">
                   {produto.tipo} {produto.marca} {produto.nome} {produto.sexo}
                 </h4>
-                <p className="text-sm text-light-gray font-medium leading-[22px] tracking-[.25px]">
-                  Cor: <span className="text-dark-gray">{produto.cor}</span>
-                </p>
-                <p className="text-sm text-light-gray font-medium leading-[22px] tracking-[.25px]">
-                  Tamanho:{" "}
-                  <span className="text-dark-gray">{produto.tamanho}</span>
-                </p>
+                {produto.cor && (
+                  <p className="text-sm text-light-gray font-medium leading-[22px] tracking-[.25px]">
+                    Cor: <span className="text-dark-gray">{produto.cor}</span>
+                  </p>
+                )}
+                {produto.tamanho && (
+                  <p className="text-sm text-light-gray font-medium leading-[22px] tracking-[.25px]">
+                    Tamanho:{" "}
+                    <span className="text-dark-gray">{produto.tamanho}</span>
+                  </p>
+                )}
               </div>
             </div>
             <div className="w-full md:w-1/2 flex flex-col md:flex-row justify-between items-between py-3 md:justify-center md:items-center">
               <div className="w-full md:w-[33%] flex flex-col justify-start pb-2.5 md:pb-[30px">
                 <div className="w-full flex flex-col justify-start]">
-                  <h3 className="md:hidden text-left md:text-center pb-2.5">QUANTIDADE</h3>
+                  <h3 className="md:hidden text-left md:text-center pb-2.5">
+                    QUANTIDADE
+                  </h3>
                 </div>
                 <div className="w-full sm:w-1/2 sm:m-auto md:w-full">
                   <div className="flex items-center justify-center">
