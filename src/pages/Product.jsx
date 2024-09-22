@@ -11,6 +11,7 @@ import {
   criarNovoPedido,
   obterPedidoPendente,
 } from "../firebase/pedido.js";
+import toast from "react-hot-toast";
 
 export const Product = () => {
   const { id } = useParams();
@@ -43,7 +44,7 @@ export const Product = () => {
       const user = auth.currentUser;
 
       if (!user) {
-        alert("Você precisa estar logado para fazer uma compra.");
+        toast.error("Você precisa estar logado para fazer uma compra.");
         navigate("/login");
         return;
       }
@@ -56,7 +57,7 @@ export const Product = () => {
 
       await adicionarAoCarrinho(produto, pedidoPendente.id);
 
-      alert("Produto adicionado ao carrinho com sucesso!");
+      toast.success("Produto adicionado ao carrinho com sucesso!");
       navigate("/checkout");
     } catch (erro) {
       console.error("Erro ao adicionar ao carrinho:", erro);

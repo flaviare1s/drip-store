@@ -5,6 +5,7 @@ import { auth } from '../firebase/config';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader } from '../components/Loader';
+import toast from 'react-hot-toast';
 
 export const CartCheckout = () => {
   const [produtos, setProdutos] = useState([]);
@@ -17,7 +18,7 @@ export const CartCheckout = () => {
         const user = auth.currentUser;
 
         if (!user) {
-          alert("Você precisa estar logado para ver o carrinho.");
+          toast.success("Você precisa estar logado para ver o carrinho.");
           navigate("/login");
           return;
         }
@@ -28,7 +29,7 @@ export const CartCheckout = () => {
           const produtosNoCarrinho = await obterProdutosDoCarrinho(pedidoPendente.id);
           setProdutos(produtosNoCarrinho);
         } else {
-          alert("Seu carrinho está vazio.");
+          toast.error("Seu carrinho está vazio.");
         }
       } catch (erro) {
         console.error("Erro ao carregar o carrinho:", erro);
