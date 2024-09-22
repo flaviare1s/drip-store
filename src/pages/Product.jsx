@@ -6,7 +6,11 @@ import { Loader } from "../components/Loader";
 import filledStar from "../assets/filled-star.svg";
 import star from "../assets/star.svg";
 import { auth } from "../firebase/config.js";
-import { adicionarAoCarrinho } from "../firebase/pedido.js";
+import {
+  adicionarAoCarrinho,
+  criarNovoPedido,
+  obterPedidoPendente,
+} from "../firebase/pedido.js";
 
 export const Product = () => {
   const { id } = useParams();
@@ -28,7 +32,9 @@ export const Product = () => {
 
   const preco = parseFloat(produto.preco);
   const desconto = parseFloat(produto.desconto);
-  const precoComDesconto = desconto ? (preco * (1 - desconto)).toFixed(2) : preco.toFixed(2);
+  const precoComDesconto = desconto
+    ? (preco * (1 - desconto)).toFixed(2)
+    : preco.toFixed(2);
 
   const handleComprar = async () => {
     setLoading(true);
@@ -42,7 +48,14 @@ export const Product = () => {
         return;
       }
 
-      await adicionarAoCarrinho(produto);
+      let pedidoPendente = await obterPedidoPendente(user.uid);
+
+      if (!pedidoPendente) {
+        pedidoPendente = await criarNovoPedido(user.uid);
+      }
+
+      await adicionarAoCarrinho(produto, pedidoPendente.id);
+
       alert("Produto adicionado ao carrinho com sucesso!");
       navigate("/checkout");
     } catch (erro) {
@@ -59,7 +72,11 @@ export const Product = () => {
       </p>
       <div className="flex flex-col lg:flex-row justify-center items-center lg:gap-10">
         <div className="bg-secondary w-full lg:w-1/2 rounded p-12">
-          <img className="w-full object-contain" src={produto.imagem} alt={produto.nome} />
+          <img
+            className="w-full object-contain"
+            src={produto.imagem}
+            alt={produto.nome}
+          />
         </div>
         <div className="w-full lg:w-1/2">
           <h1 className="text-2xl font-bold leading-[32px] tracking-[1px] md:text-[32px] md:leading-[36px] pt-10">
@@ -77,24 +94,53 @@ export const Product = () => {
               />
             ))}
             <div className="ml-3 bg-warning text-white rounded font-bold text-xs py-1 px-2 flex justify-center items-center gap-2">
-              {produto.avaliacao} <span><img className="h-4" src={star} alt="Estrela" /></span>
+              {produto.avaliacao}{" "}
+              <span>
+                <img className="h-4" src={star} alt="Estrela" />
+              </span>
             </div>
           </div>
           <div className="py-5">
             {desconto && desconto > 0 ? (
-              <p>R$ <span className="font-bold text-[32px]">{precoComDesconto}</span> <span className="text-sm line-through opacity-30">{preco.toFixed(2)}</span></p>
+              <p>
+                R${" "}
+                <span className="font-bold text-[32px]">
+                  {precoComDesconto}
+                </span>{" "}
+                <span className="text-sm line-through opacity-30">
+                  {preco.toFixed(2)}
+                </span>
+              </p>
             ) : (
-              <p>R$ <span className="font-bold text-[32px]">{preco.toFixed(2)}</span></p>
+              <p>
+                R${" "}
+                <span className="font-bold text-[32px]">
+                  {preco.toFixed(2)}
+                </span>
+              </p>
             )}
           </div>
           <div>
-            <p className="text-sm text-light-gray font-bold leading-[22px] tracking-[.75px]">Descrição do poduto:</p>
+            <p className="text-sm text-light-gray font-bold leading-[22px] tracking-[.75px]">
+              Descrição do poduto:
+            </p>
             <p className="text-dark-gray-2 text-sm">{produto.descricao}</p>
           </div>
-          <button onClick={handleComprar} disabled={loading} className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]">Comprar</button>
+          <button
+            onClick={handleComprar}
+            disabled={loading}
+            className="inline-block bg-warning text-white font-bold tracking-[.75px] uppercase text-center py-3 px-4 rounded-lg w-full h-12 hover:bg-warning_hover mt-12 lg:w-[220px]"
+          >
+            Comprar
+          </button>
         </div>
       </div>
-      <button onClick={() => navigate(-1)} className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold">← Voltar</button>
+      <button
+        onClick={() => navigate(-1)}
+        className="inline-block py-5 text-primary font-semibold md:font-normal text-sm md:text-lg tracking-[.75px] hover:font-bold"
+      >
+        ← Voltar
+      </button>
     </section>
   );
-}; 
+};

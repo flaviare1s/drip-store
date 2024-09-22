@@ -1,9 +1,19 @@
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { db, auth } from "./config";
 
 export const pedidosCol = collection(db, "pedidos");
 
-export async function adicionarAoCarrinho(produto) {
+export async function adicionarAoCarrinho(produto, pedidoId) {
   try {
     const user = auth.currentUser;
 
@@ -11,10 +21,12 @@ export async function adicionarAoCarrinho(produto) {
       throw new Error("Usuário não está autenticado.");
     }
 
-    const novoPedido = {
-      uid: user.uid,
-      produtos: [
-        {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+    const pedidoSnap = await getDoc(pedidoRef);
+
+    if (pedidoSnap.exists()) {
+      await updateDoc(pedidoRef, {
+        produtos: arrayUnion({
           id: produto.id,
           nome: produto.nome,
           marca: produto.marca,
@@ -30,18 +42,77 @@ export async function adicionarAoCarrinho(produto) {
           precoFinal: produto.desconto
             ? produto.preco * (1 - produto.desconto)
             : produto.preco,
-        },
-      ],
+        }),
+      });
+
+      console.log("Produto adicionado ao pedido com ID: ", pedidoId);
+    } else {
+      throw new Error("Pedido não encontrado.");
+    }
+  } catch (erro) {
+    console.error("Erro ao adicionar produto ao pedido: ", erro);
+    throw erro;
+  }
+}
+
+export async function criarNovoPedido() {
+  try {
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("Usuário não está autenticado.");
+    }
+
+    const uid = user.uid;
+
+    const novoPedido = {
+      uid: uid,
+      produtos: [],
       data: new Date().toISOString(),
-      status: "pendente",
+      status: "Pendente",
     };
 
     const docRef = await addDoc(pedidosCol, novoPedido);
-    console.log("Pedido adicionado com ID: ", docRef.id);
-
     return docRef.id;
   } catch (erro) {
-    console.error("Erro ao adicionar pedido: ", erro);
+    console.error("Erro ao criar novo pedido: ", erro);
+    throw erro;
+  }
+}
+
+export async function finalizarPedido(pedidoId) {
+  try {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+
+    await updateDoc(pedidoRef, {
+      status: "Em andamento",
+      dataConclusao: new Date().toISOString(),
+    });
+
+    console.log("Pedido finalizado com sucesso.");
+  } catch (erro) {
+    console.error("Erro ao finalizar o pedido: ", erro);
+    throw erro;
+  }
+}
+
+export async function obterPedidoPendente(uid) {
+  try {
+    const q = query(
+      pedidosCol,
+      where("uid", "==", uid),
+      where("status", "==", "Pendente")
+    );
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const pedidoDoc = querySnapshot.docs[0];
+      return { id: pedidoDoc.id, ...pedidoDoc.data() };
+    } else {
+      return null;
+    }
+  } catch (erro) {
+    console.error("Erro ao buscar pedido pendente: ", erro);
     throw erro;
   }
 }
