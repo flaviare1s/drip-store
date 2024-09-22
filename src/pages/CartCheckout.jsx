@@ -1,7 +1,68 @@
 import { CartCheckoutResume } from '../components/CartCheckout/CartCheckoutResume'
 import { CartCheckoutProduct } from '../components/CartCheckout/CartCheckoutProduct'
+import { atualizarProdutoNoCarrinho, obterPedidoPendente, obterProdutosDoCarrinho } from '../firebase/pedido';
+import { auth } from '../firebase/config';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Loader } from '../components/Loader';
 
 export const CartCheckout = () => {
+  const [produtos, setProdutos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const carregarCarrinho = async () => {
+      try {
+        const user = auth.currentUser;
+
+        if (!user) {
+          alert("Você precisa estar logado para ver o carrinho.");
+          navigate("/login");
+          return;
+        }
+
+        const pedidoPendente = await obterPedidoPendente(user.uid);
+
+        if (pedidoPendente) {
+          const produtosNoCarrinho = await obterProdutosDoCarrinho(pedidoPendente.id);
+          setProdutos(produtosNoCarrinho);
+        } else {
+          alert("Seu carrinho está vazio.");
+        }
+      } catch (erro) {
+        console.error("Erro ao carregar o carrinho:", erro);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarCarrinho();
+  }, [navigate]);
+
+  const handleChangeAmount = async (id, newAmount) => {
+    console.log(`Alterando a quantidade do produto ${id} para ${newAmount}`)
+    const pedidoPendente = await obterPedidoPendente(auth.currentUser.uid);
+
+    if (pedidoPendente) {
+      const updatedProducts = produtos.map(item => {
+        if (item.id === id && newAmount > 0) {
+          return {
+            ...item,
+            quantidade: newAmount,
+          };
+        }
+        return item;
+      });
+
+      setProdutos(updatedProducts);
+
+      await atualizarProdutoNoCarrinho(pedidoPendente.id, id, newAmount);
+    }
+  };
+
+
+  if (loading) return <Loader />;
 
   return (
     <div className='flex flex-col justify-between items-start gap-5 p-[30px] md:flex-row'>
@@ -16,8 +77,8 @@ export const CartCheckout = () => {
             <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>TOTAL</h3>
           </div>
         </div>
-        <section>
-          <CartCheckoutProduct />
+        <section className='w-full'>
+          <CartCheckoutProduct produtos={produtos} onChangeAmount={handleChangeAmount} />
         </section>
 
         <div className='flex justify-between text-center'>

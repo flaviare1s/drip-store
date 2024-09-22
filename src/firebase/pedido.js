@@ -116,3 +116,53 @@ export async function obterPedidoPendente(uid) {
     throw erro;
   }
 }
+
+export async function obterProdutosDoCarrinho(pedidoId) {
+  try {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+    const pedidoSnap = await getDoc(pedidoRef);
+
+    if (pedidoSnap.exists()) {
+      const pedidoData = pedidoSnap.data();
+      return pedidoData.produtos;
+    } else {
+      throw new Error("Pedido não encontrado.");
+    }
+  } catch (erro) {
+    console.error("Erro ao obter produtos do carrinho:", erro);
+    throw erro;
+  }
+}
+
+export const atualizarProdutoNoCarrinho = async (
+  pedidoId,
+  produtoId,
+  novaQuantidade
+) => {
+  try {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+    const pedidoSnap = await getDoc(pedidoRef);
+
+    if (pedidoSnap.exists()) {
+      const produtos = pedidoSnap.data().produtos;
+      const produtoIndex = produtos.findIndex((prod) => prod.id === produtoId);
+
+      if (produtoIndex > -1) {
+        // Atualiza a quantidade do produto específico
+        produtos[produtoIndex].quantidade = novaQuantidade;
+
+        await updateDoc(pedidoRef, {
+          produtos: produtos,
+        });
+
+        console.log(
+          `Produto ${produtoId} atualizado para a quantidade ${novaQuantidade}.`
+        );
+      }
+    } else {
+      throw new Error("Pedido não encontrado.");
+    }
+  } catch (erro) {
+    console.error("Erro ao atualizar o produto no carrinho:", erro);
+  }
+};

@@ -32,6 +32,7 @@ export default {
         "light-gray-2": "#CCCCCC",
         "light-gray-3": "#F5F5F5",
         "light-blue": "#D8E3F2",
+        "light-purple": "#E2E3FF",
         white: "#FFFFFF",
         bright_yellow: "#E7FF86",
       },
