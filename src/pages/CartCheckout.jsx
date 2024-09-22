@@ -65,43 +65,43 @@ export const CartCheckout = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className='flex flex-col justify-between items-start gap-5 p-[30px] lg:flex-row'>
-      <div className='w-full lg:w-[72%]'>
+    <section className='flex flex-col justify-between items-start gap-5 p-[30px] lg:flex-row bg-purple-50'>
+      <div className='w-full lg:w-[72%] bg-white p-[30px] rounded'>
         <div className='flex flex-col md:flex-row justify-between w-full pb-5'>
           <div className='w-1/2'>
             <h3 className='text-sm font-bold text-dark-gray-2 leading-[22px]'>MEU CARRINHO</h3>
           </div>
-          <hr className='bg-light-gray-2 mt-5 md:hidden' />
+          <hr className='bg-light-gray-2 mt-5 w-full md:hidden'/>
           <div className='w-1/2 hidden md:flex justify-between items-center gap-[30px]'>
-            <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>QUANTIDADE</h3>
-            <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>UNITÁRIO</h3>
-            <h3 className='w-[33%] items-center text-center m-auto min-w-[120px]'>TOTAL</h3>
+            <h3 className='w-[33%] items-center text-center m-auto'>QUANTIDADE</h3>
+            <h3 className='w-[33%] items-center text-center m-auto'>UNITÁRIO</h3>
+            <h3 className='w-[33%] items-center text-center m-auto'>TOTAL</h3>
           </div>
         </div>
-        <section className='w-full'>
+        <section>
           <CartCheckoutProduct produtos={produtos} onChangeAmount={handleChangeAmount} />
         </section>
 
-        <div className='flex flex-col md:flex-row justify-between text-center'>
-          <div className='w-full md:w-1/2 block text-left pt-5'>
+        <section className='flex flex-col md:flex-row justify-between text-center md:gap-10'>
+          <div className='text-left pt-5'>
             <p className='text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]'>Cupom de desconto</p>
             <div className='flex flex-col md:flex-row gap-2.5'>
-              <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="desc" id="desc" placeholder='Insira seu código' />
-              <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3  h-[60px]'>OK</button>
+              <input className='py-4 pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="desc" id="desc" placeholder='Insira seu código' />
+              <button className='py-4 px-5 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3  h-[60px]'>OK</button>
             </div>
           </div>
-          <div className='w-full md:w-1/2 block text-left pt-5'>
+          <div className='text-left pt-5'>
             <p className='text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]'>Calcular frete</p>
             <div className='flex flex-col md:flex-row gap-2.5'>
-              <input className='py-4 pr-[61px] pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] mt-10px border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="cep" id="cep" placeholder='Insira seu CEP' />
-              <button className='py-4 px-10 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3 h-[60px]'>OK</button>
+              <input className='py-4 pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] border-none rounded-[5px] px-2.5 h-[60px]' type="text" name="cep" id="cep" placeholder='Insira seu CEP' />
+              <button className='py-4 px-5 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3 h-[60px]'>OK</button>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-      <div className='w-[28%]'>
+      <div className='w-full lg:w-[28%]'>
         <CartCheckoutResume produtos={produtos} />
       </div>
-    </div>
+    </section>
   )
 }

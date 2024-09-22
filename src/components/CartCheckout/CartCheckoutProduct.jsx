@@ -5,7 +5,7 @@ export const CartCheckoutProduct = ({
   onChangeAmount,
 }) => {
   return (
-    <div>
+    <section className="rounded">
       {produtos.length === 0 ? (
         <p>Seu carrinho está vazio.</p>
       ) : (
@@ -113,6 +113,6 @@ export const CartCheckoutProduct = ({
           </div>
         ))
       )}
-    </div>
+    </section>
   );
 };
