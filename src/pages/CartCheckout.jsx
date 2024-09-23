@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader } from "../components/Loader";
 import toast from "react-hot-toast";
+import { CartCheckoutInput } from "../components/CartCheckout/CartCheckoutInput";
 
 export const CartCheckout = () => {
   const [produtos, setProdutos] = useState([]);
@@ -138,41 +139,9 @@ export const CartCheckout = () => {
               handleRemoveItem={handleRemoveItem}
             />
           </section>
-          <section className="flex flex-col md:flex-row justify-between text-center md:gap-10">
-            <div className="text-left pt-5">
-              <p className="text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]">
-                Cupom de desconto
-              </p>
-              <div className="flex flex-col md:flex-row gap-2.5">
-                <input
-                  className="py-4 pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] border-none rounded-[5px] px-2.5 h-[60px]"
-                  type="text"
-                  name="desc"
-                  id="desc"
-                  placeholder="Insira seu código"
-                />
-                <button className="py-4 px-5 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3  h-[60px]">
-                  OK
-                </button>
-              </div>
-            </div>
-            <div className="text-left pt-5">
-              <p className="text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]">
-                Calcular frete
-              </p>
-              <div className="flex flex-col md:flex-row gap-2.5">
-                <input
-                  className="py-4 pt-3 bg-light-gray-3 text-dark-gray-3 leading-[28px] tracking-[.75px] border-none rounded-[5px] px-2.5 h-[60px]"
-                  type="text"
-                  name="cep"
-                  id="cep"
-                  placeholder="Insira seu CEP"
-                />
-                <button className="py-4 px-5 bg-light-gray-3 text-primary text-center text-sm font-bold leading-[22px] tracking-[.75px] border-none rounded-[5px] hover:bg-secondary hover:text-light-gray-3 h-[60px]">
-                  OK
-                </button>
-              </div>
-            </div>
+          <section className="flex flex-col md:flex-row justify-between text-center md:gap-10 w-full">
+            <CartCheckoutInput title='Cupom de desconto' />
+            <CartCheckoutInput title='Calcular frete' />
           </section>
         </div>
         <div className="w-full lg:w-[28%]">
