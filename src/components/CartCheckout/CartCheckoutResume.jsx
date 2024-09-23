@@ -41,7 +41,7 @@ export const CartCheckoutResume = ({ subtotal, frete, desconto }) => {
         </div>
       </div>
       <Link
-        to="/orders"
+        to="/payment"
         className="block w-full h-10 bg-warning text-light-gray-3 text-center py-2 font-bold leading-6 rounded hover:bg-warning_hover mt-5"
       >
         Continuar

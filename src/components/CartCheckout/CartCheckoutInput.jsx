@@ -2,7 +2,7 @@
 export const CartCheckoutInput = ({ title }) => {
   return (
     <section className="text-left pt-5 w-full">
-      <p className="text-dark-gray-2 font-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]">
+      <p className="text-dark-gray-2 text-xs font-bold leading-[24px] tracking-[0.75] pb-[6px]">
         { title }
       </p>
       <div className="flex flex-col md:flex-row gap-2.5">
