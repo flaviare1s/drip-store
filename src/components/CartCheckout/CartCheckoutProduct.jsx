@@ -114,7 +114,6 @@ export const CartCheckoutProduct = ({
                   </div>
                 </div>
               </div>
-              <hr className="md:hidden mt-3" />
             </div>
           </div>
         ))

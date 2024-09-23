@@ -139,6 +139,7 @@ export const CartCheckout = () => {
               handleRemoveItem={handleRemoveItem}
             />
           </section>
+          <hr className="hidden md:block w-full bg-light-gray-2 mt-5" />
           <section className="hidden md:flex flex-col md:flex-row justify-between text-center md:gap-10 w-full">
             <CartCheckoutInput title='Cupom de desconto' />
             <CartCheckoutInput title='Calcular frete' />
