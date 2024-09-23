@@ -139,11 +139,17 @@ export const CartCheckout = () => {
               handleRemoveItem={handleRemoveItem}
             />
           </section>
-          <section className="flex flex-col md:flex-row justify-between text-center md:gap-10 w-full">
+          <section className="hidden md:flex flex-col md:flex-row justify-between text-center md:gap-10 w-full">
             <CartCheckoutInput title='Cupom de desconto' />
             <CartCheckoutInput title='Calcular frete' />
           </section>
         </div>
+          <section className="md:hidden bg-white px-[30px] pb-[30px] rounded">
+            <CartCheckoutInput title='Cupom de desconto' />
+          </section>
+        <section className="md:hidden bg-white px-[30px] pb-[30px] rounded">
+            <CartCheckoutInput title='Calcular frete' />
+          </section>
         <div className="w-full lg:w-[28%]">
           <CartCheckoutResume
             produtos={produtos}
