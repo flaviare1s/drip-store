@@ -82,7 +82,7 @@ export const Register = () => {
                 required: "E-mail obrigatório",
                 pattern: {
                   value: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-                  message: "Invalid e-mail",
+                  message: "E-mail inválido",
                 },
               })}
             />
@@ -103,7 +103,7 @@ export const Register = () => {
                 required: "Digite uma senha",
                 minLength: {
                   value: 8,
-                  message: "A password deve ter pelo menos 6 digitos",
+                  message: "A senha deve ter pelo menos 6 digitos",
                 },
               })}
             />

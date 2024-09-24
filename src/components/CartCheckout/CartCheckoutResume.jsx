@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
-export const CartCheckoutResume = ({ subtotal, frete, desconto }) => {
+export const CartCheckoutResume = ({ subtotal, frete, desconto, nomeBtn }) => {
   const total = (parseFloat(subtotal) + frete - desconto).toFixed(2);
   return (
     <section className="w-full p-[30px] bg-white rounded">
@@ -44,7 +44,7 @@ export const CartCheckoutResume = ({ subtotal, frete, desconto }) => {
         to="/payment"
         className="block w-full h-10 bg-warning text-light-gray-3 text-center py-2 font-bold leading-6 rounded hover:bg-warning_hover mt-5"
       >
-        Continuar
+        {nomeBtn}
       </Link>
     </section>
   );

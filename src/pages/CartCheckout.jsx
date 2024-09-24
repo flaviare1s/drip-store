@@ -157,6 +157,7 @@ export const CartCheckout = () => {
             subtotal={subtotal}
             frete={frete}
             desconto={desconto}
+            nomeBtn="Continuar"
           />
         </div>
       </div>
