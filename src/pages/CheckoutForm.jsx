@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { RadioSVG } from "../components/Products/RadioSVG";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CheckoutForm = () => {
   const {
@@ -10,21 +11,22 @@ export const CheckoutForm = () => {
     formState: { errors },
   } = useForm();
   const [selectedOption, setSelectedOption] = useState("");
+  const navigate = useNavigate()
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async () => {
+    navigate("/")
   };
 
   return (
     <section className="flex flex-col justify-between items-start p-[30px] bg-purple-50">
-      <h1 className="text-dark-gray text-lg font-bold leading-[34px] tracking-[0.75] pb-[6px] md:text-[32px] md:leading-[36px] md:tracking-[1px] md:w-1/2 m-auto">
+      <h1 className="text-dark-gray text-lg font-bold leading-[34px] tracking-[0.75] md:text-[32px] md:leading-[36px] md:tracking-[1px] md:w-1/2 md:m-auto">
         Finalizar Compra
       </h1>
       <form
-        className="bg-purple-50 w-full rounded mt-[20px] md:w-1/2 m-auto"
+        className="bg-purple-50 w-full rounded mt-[10px] md:w-1/2 m-auto"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <section className="bg-purple-50 w-full rounded mt-[20px]">
+        <section className="bg-purple-50 w-full rounded">
           <div className="bg-white p-[30px] w-full rounded mt-[20px]">
             <h2 className="text-sm font-bold text-dark-gray-2 leading-[22px] tracking-[0.75]">
               Informações Pessoais
@@ -334,10 +336,6 @@ export const CheckoutForm = () => {
                 placeholder="Insira o número do Cartao"
                 {...register("numeroCartao", {
                   required: "Este campo é obrigatório",
-                  pattern: {
-                    value:
-                      /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|2(?:14|24|[3-6][0-9]|[8][0-9]|[9][0-1])[0-9]{12}|7[0-9]{15})$/,
-                  },
                 })}
               />
               {errors.numeroCartao && (

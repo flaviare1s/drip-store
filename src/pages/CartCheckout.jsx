@@ -2,6 +2,7 @@ import { CartCheckoutResume } from "../components/CartCheckout/CartCheckoutResum
 import { CartCheckoutProduct } from "../components/CartCheckout/CartCheckoutProduct";
 import {
   atualizarProdutoNoCarrinho,
+  atualizarStatusDoPedido,
   obterPedidoPendente,
   obterProdutosDoCarrinho,
   removerProdutoDoCarrinho,
@@ -103,6 +104,31 @@ export const CartCheckout = () => {
     }
   };
 
+  const handleContinue = async () => {
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("Você precisa estar logado para continuar.");
+        return;
+      }
+
+      const pedidoPendente = await obterPedidoPendente(user.uid);
+
+      if (pedidoPendente) {
+   
+        await atualizarStatusDoPedido(pedidoPendente.id, "Em andamento");
+     
+        navigate("/payment");
+      } else {
+        toast.error("Nenhum pedido encontrado para atualizar.");
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar o status do pedido:", error);
+      toast.error("Erro ao continuar o pedido.");
+    }
+  };
+
   if (loading) return <Loader />;
 
   return (
@@ -158,6 +184,7 @@ export const CartCheckout = () => {
             frete={frete}
             desconto={desconto}
             nomeBtn="Continuar"
+            onClick={handleContinue}
           />
         </div>
       </div>

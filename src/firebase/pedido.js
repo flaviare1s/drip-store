@@ -213,3 +213,17 @@ export const removerProdutoDoCarrinho = async (pedidoId, produtoId) => {
     console.error("Erro ao remover o produto do carrinho:", erro);
   }
 };
+
+export const atualizarStatusDoPedido = async (pedidoId, novoStatus) => {
+  try {
+    const pedidoRef = doc(db, "pedidos", pedidoId);
+    await updateDoc(pedidoRef, {
+      status: novoStatus,
+      updatedAt: new Date().toISOString(),
+    });
+    console.log(`Status do pedido ${pedidoId} atualizado para ${novoStatus}.`);
+  } catch (erro) {
+    console.error("Erro ao atualizar o status do pedido:", erro);
+    throw erro;
+  }
+};
