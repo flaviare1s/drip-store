@@ -116,8 +116,8 @@ export const CheckoutForm = () => {
                 {...register("cel", {
                   required: "Este campo é obrigatório",
                   pattern: {
-                    value: /^\(\d{2}\)\s?\d{5}-?\d{4}$/,
-                    message: "Número inválido. Formato: (xx) xxxxx-xxxx",
+                    value: /^(?:\+55\s?)?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$|^\d{10,11}$/,
+                    message: "Número inválido.",
                   },
                 })}
               />
