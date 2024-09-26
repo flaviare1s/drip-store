@@ -14,7 +14,7 @@ export const CheckoutForm = () => {
   const navigate = useNavigate()
 
   const onSubmit = async () => {
-    navigate("/")
+    navigate("/order-success")
   };
 
   return (
