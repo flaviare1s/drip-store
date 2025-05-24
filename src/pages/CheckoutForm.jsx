@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { RadioSVG } from "../components/Products/RadioSVG";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const CheckoutForm = () => {
@@ -9,13 +9,40 @@ export const CheckoutForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
   } = useForm();
+  const cep = watch("cep");
   const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate()
 
   const onSubmit = async () => {
     navigate("/order-success")
   };
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      const cepLimpo = cep?.replace(/\D/g, "");
+
+      if (cepLimpo?.length === 8) {
+        try {
+          const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+          const data = await response.json();
+
+          if (!data.erro) {
+            setValue("endereco", data.logradouro || "");
+            setValue("bairro", data.bairro || "");
+            setValue("cidade", data.localidade || "");
+          }
+        } catch (error) {
+          console.error("Erro ao buscar o CEP:", error);
+        }
+      }
+    };
+
+    fetchAddress();
+  }, [cep, setValue]);
+  
 
   return (
     <section className="flex flex-col justify-between items-start p-[30px] bg-purple-50">
@@ -134,6 +161,30 @@ export const CheckoutForm = () => {
               Informações de Entrega
             </h2>
             <hr className="bg-light-gray-2 my-5 w-full" />
+            <div className="mt-5">
+              <label
+                className="block text-xs font-bold text-dark-gray-2 leading-[22px] tracking-[0.75]"
+                htmlFor="cep"
+              >
+                CEP *
+              </label>
+              <input
+                className="w-full p-4 bg-light-gray-3 rounded-lg mt-[5px]"
+                type="tel"
+                id="cep"
+                placeholder="Insira seu CEP"
+                {...register("cep", {
+                  required: "Este campo é obrigatório",
+                  pattern: {
+                    value: /^\d{5}-?\d{3}$/,
+                    message: "CEP inválido.",
+                  },
+                })}
+              />
+              {errors.cep && (
+                <small className="text-error mb-5">{errors.cep.message}</small>
+              )}
+            </div>
             <div>
               <label
                 className="block text-xs font-bold text-dark-gray-2 leading-[22px] tracking-[0.75]"
@@ -198,30 +249,6 @@ export const CheckoutForm = () => {
                 <small className="text-error mb-5">
                   {errors.cidade.message}
                 </small>
-              )}
-            </div>
-            <div className="mt-5">
-              <label
-                className="block text-xs font-bold text-dark-gray-2 leading-[22px] tracking-[0.75]"
-                htmlFor="cep"
-              >
-                CEP *
-              </label>
-              <input
-                className="w-full p-4 bg-light-gray-3 rounded-lg mt-[5px]"
-                type="tel"
-                id="cep"
-                placeholder="Insira seu CEP"
-                {...register("cep", {
-                  required: "Este campo é obrigatório",
-                  pattern: {
-                    value: /^\d{5}-?\d{3}$/,
-                    message: "CEP inválido.",
-                  },
-                })}
-              />
-              {errors.cep && (
-                <small className="text-error mb-5">{errors.cep.message}</small>
               )}
             </div>
             <div className="mt-5">
